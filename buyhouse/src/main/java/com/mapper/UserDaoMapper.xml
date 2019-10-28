@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<!-- namespace 的值是接口 -->
+<mapper namespace="com.dao.UserDaoInf">
+
+	<select id="login" parameterType="com.vo.User" resultType="com.vo.User">
+		select * from
+		tuser where uname = #{uname} and pwd = #{pwd}
+	</select>
+
+	<select id="getID" parameterType="String" resultType="int">
+		select id
+		from tuser where uname = #{uname}
+	</select>
+
+	<insert id="zhuce" parameterType="com.vo.User">
+		insert into tuser(id,uname,pwd)
+		values((select nvl(max(id),0) from tuser )+1,#{uname},#{pwd})
+	</insert>
+</mapper>
