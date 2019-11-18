@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seirin.dao.area.PositionDaoInf">
+
+	<insert id="addPosition"
+		parameterType="com.seirin.vo.area.Position">
+		<selectKey resultType="int" keyProperty="position_id"
+			order="BEFORE">
+			select
+			position_seq.nextVal
+			from dual
+		</selectKey>
+		insert into Position
+		values
+		(#{position_id},#{department_id},#{position_name,jdbcType=VARCHAR})
+
+	</insert>
+
+
+	<select id="selectPosition"
+		resultType="com.seirin.vo.area.Position">
+		select
+		p.*,a.area_name,d.department_name
+		from DEPARTMENT
+		d,area a,POSITION p
+		where d.area_id=a.area_id and
+		d.department_id=p.department_id
+	</select>
+
+	<select id="selectPositionByDeptid"
+		resultType="com.seirin.vo.area.Position" parameterType="int">
+		select *
+		from POSITION
+		where department_id=#{department_id}
+		
+	</select>
+
+
+	<select id="selectPositionByInfo"
+		resultType="com.seirin.vo.area.Position"
+		parameterType="com.seirin.vo.area.Position">
+		select
+		p.*,a.area_name,d.department_name
+		from DEPARTMENT d,area
+		a,POSITION p
+		where d.area_id=a.area_id and
+		d.department_id=p.department_id
+
+		<if test="area_id  != 0">
+			and d.area_id = #{area_id}
+		</if>
+		<if test="department_id  !=  0">
+			and p.department_id = #{department_id}
+		</if>
+	</select>
+
+	<select id="selectPositionByid"
+		resultType="com.seirin.vo.area.Position" parameterType="int">
+		select
+		p.*,a.area_id
+		from Position p,DEPARTMENT d,area a
+		where
+		p.department_id=d.department_id and
+		d.area_id=a.area_id and
+		p.position_id=#{position_id}
+	</select>
+
+	<update id="updatePosition"
+		parameterType="com.seirin.vo.area.Position">
+		update Position
+		set
+		position_id =
+		#{position_id},department_id = #{department_id},
+		position_name =
+		#{position_name}
+		where position_id = #{position_id}
+	</update>
+
+
+	<select id="selectDepartmentByAreaid" parameterType="int"
+		resultType="com.seirin.vo.area.Department">
+		select d.*
+		from DEPARTMENT d,area a
+		where d.area_id=a.area_id
+		and a.area_id= #{area_id}
+	</select>
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,52 @@
+角模块：
+       roleList .jsp ：      1) 用到了复选框单选的效果
+                         2) 得到列表页中复选框的值，带到区域的修改页面中window.location.href = path	+ "/quyuControl/selectQuyuByid.action?area_id="+num;
+                         3)待修改的地方
+                                      角色状态
+               <c:if test="${role.role_state == 0}"  >
+				有效
+			   </c:if>
+			   <c:if test="${role.role_state == 1}">
+				 无效
+			   </c:if>    
+				如何放把0 1变成变量，因为01的值是从其它类中取来的       类名.变量名
+      
+      
+      
+       addrole.jsp：      1)用到了提交按钮在form表单是，用$("#form1").submit()来提交    
+                      2)表单验证用jquery
+                      3)生成easyUi树，难点。
+                                       
+      
+      updaterole.jsp:     1)表单验证用jquery
+                          2)树的生成，及回显勾选树叶，及取新树叶的值，进行修改    
+                          3)待修改的地方
+                                     
+                                       角色状态
+                                     <select   id="role_state" name="role_state" class="{required:true}"  style="color: red" >
+									<c:if test="${requestScope.role.role_state == 0}">
+									 <option value="<%=MessageUtil.ROLE_STATE_YOUXIAO%>" selected>有效</option>
+									</c:if>
+								   <c:if test="${requestScope.role.role_state == 1}">
+								     <option value="<%=MessageUtil.ROLE_STATE_WUXIAO%>" selected>无效</option>
+								     </c:if>
+								     
+								  <c:if test="${requestScope.role.role_state != 0}">
+									 <option value="<%=MessageUtil.ROLE_STATE_YOUXIAO%>" >有效</option>
+									</c:if>
+								   <c:if test="${requestScope.role.role_state != 1}">
+								     <option value="<%=MessageUtil.ROLE_STATE_WUXIAO%>" >无效</option>
+								     </c:if>
+									
+								    </select>
+      
+                                      如何放把0 1变成变量，因为01的值是从其它类中取来的       类名.变量名
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                   

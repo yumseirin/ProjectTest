@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seirin.dao.area.DepartmentDaoInf">
+
+	<insert id="addDepartment"
+		parameterType="com.seirin.vo.area.Department">
+		<selectKey resultType="int" keyProperty="department_id"
+			order="BEFORE">
+			select
+			department_seq.nextVal
+			from dual
+		</selectKey>
+		insert into DEPARTMENT
+		values
+		(#{department_id},#{area_id},#{department_name,jdbcType=VARCHAR},#{department_description,jdbcType=VARCHAR})
+
+	</insert>
+
+
+	<select id="selectDepartment"
+		resultType="com.seirin.vo.area.Department">
+		select d.*,a.area_name
+		from DEPARTMENT d,area a
+		where
+		d.area_id=a.area_id
+		order by DEPARTMENT_ID
+	</select>
+
+	<select id="selectDepartmentByAreaid"
+		resultType="com.seirin.vo.area.Department" parameterType="int">
+		select *
+		from DEPARTMENT
+		where area_id=#{area_id}
+	</select>
+
+	<select id="selectDepartmentByid"
+		resultType="com.seirin.vo.area.Department" parameterType="int">
+		select *
+		from
+		DEPARTMENT
+		where department_id=#{department_id}
+	</select>
+
+	<update id="updateDepartment"
+		parameterType="com.seirin.vo.area.Department">
+		update DEPARTMENT
+		set area_id =
+		#{area_id},department_name = #{department_name},
+		department_description = #{department_description}
+		where department_id
+		= #{department_id}
+	</update>
+
+</mapper>

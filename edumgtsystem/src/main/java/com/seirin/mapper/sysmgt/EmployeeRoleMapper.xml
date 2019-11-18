@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seirin.dao.sysmgt.EmployeeRoleDaoInf">
+
+
+	<select id="selectEmployeeRole" parameterType="com.seirin.vo.employee.Employee"
+		resultType="com.seirin.vo.sysmgt.EmployeeRole">
+
+		select e. employee_id,e.employee_name,e.employee_status
+		,e.employee_loginname,ro.role_name,ro.role_state
+		from employee e left
+		join employee_role r on e.employee_id=r.employee_id
+		left join role ro
+		on r.role_id=ro.role_id
+		<if test="employee_name !=null and employee_name!=''">
+			where e.employee_name like concat('%',#{employee_name,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+
+	<!-- 根据员工id获得员工角色权限 -->
+	<select id="selectEmployeeRoleById" parameterType="int"
+		resultType="com.seirin.vo.sysmgt.EmployeeRole">
+		select e.*,er.role_id,r.role_name
+		from EMPLOYEE e,EMPLOYEE_ROLE er,ROLE r
+		where e.employee_id = er.employee_id 
+		and er.role_id = r.role_id 
+		and er.employee_id = #{employee_id}
+	</select>
+
+	<select id="selectRole" resultType="com.seirin.vo.sysmgt.Role"
+		parameterType="int">
+		select *
+		from role
+		where role_state=#{0}
+	</select>
+
+	<select id="getEmployeeById"
+		resultType="com.seirin.vo.employee.Employee" parameterType="String">
+		select
+		em.employee_id,em.employee_name,em.employee_loginname
+		from employee em
+		where em.employee_id=#{0}
+	</select>
+
+	<delete id="deleteEmployeeRole" parameterType="int">
+
+		delete from
+		employee_role
+		where employee_id=#{0}
+	</delete>
+
+	<insert id="addEmployeeRole" parameterType="int">
+
+		insert into
+		employee_role(role_id,employee_id) values(#{1},#{0})
+	</insert>
+	
+	<!-- 禁用员工（设置员工状态为禁用） -->
+	<update id="disableEmployeeById" parameterType="int">
+		update EMPLOYEE
+		set
+		employee_status = ${@com.seirin.util.MessageUtil@EMPLOYEE_STATUS_JINYONG}
+		where employee_id = #{employee_id}
+	</update>
+	
+	<!-- 启用员工（设置员工状态为可用） -->
+	<update id="enableEmployeeById" parameterType="int">
+		update EMPLOYEE
+		set
+		employee_status = ${@com.seirin.util.MessageUtil@EMPLOYEE_STATUS_KEYONG}
+		where employee_id = #{employee_id}
+	</update>
+	
+	<!-- 修改密码 -->
+	<update id="updateEmployeePwd" parameterType="com.seirin.vo.employee.Employee">
+		update EMPLOYEE
+		set
+		EMPLOYEE_PASSWORD = #{employee_password,jdbcType=VARCHAR}
+		where employee_id = #{employee_id,jdbcType=INTEGER}
+	</update>
+
+
+	<!-- ========== 员工权限角色管理 左边是菜单，右边是按钮 ============== -->
+	<!-- ===== 一级菜单 ====== -->
+	<select id="selectOne" parameterType="int"
+		resultType="com.seirin.vo.sysmgt.Authority">
+		select
+		au.authority_id,au.authority_name,au.AUTHORITY_PARENT_ID,au.authority_type,
+		au.authority_status,au.AUTHORITY_URL
+
+		from employee e,employee_role
+		r,role ro,role_authority rt,authority au
+
+		where
+		e.employee_id=r.employee_id and r.role_id=ro.role_id and
+		ro.role_id=rt.role_id
+		and rt.authority_id=au.authority_id and
+		e.employee_id=#{0}
+		and au.AUTHORITY_PARENT_ID is null
+		order by
+		AUTHORITY_LEVEL
+	</select>
+	<!-- ===== 二级菜单 ====== -->
+	<select id="selectTwo" parameterType="int"
+		resultType="com.seirin.vo.sysmgt.Authority">
+		select
+		au.authority_id,au.authority_name,au.AUTHORITY_PARENT_ID,au.authority_type,au.authority_status,au.AUTHORITY_URL
+
+		from employee e,employee_role r,role ro,role_authority rt,authority au
+		where e.employee_id=r.employee_id and r.role_id=ro.role_id and
+		ro.role_id=rt.role_id
+		and rt.authority_id=au.authority_id and
+		e.employee_id=#{0} and
+		au.AUTHORITY_TYPE=0
+		and au.AUTHORITY_PARENT_ID is
+		not null
+		order by AUTHORITY_LEVEL
+	</select>
+	<!-- ===== 三级菜单 ====== -->
+	<select id="selectThree" parameterType="int"
+		resultType="com.seirin.vo.sysmgt.Authority">
+		select
+		au.authority_id,au.authority_name,au.AUTHORITY_PARENT_ID,au.authority_type,au.authority_status,au.AUTHORITY_URL
+
+		from employee e,employee_role r,role ro,role_authority rt,authority au
+
+		where e.employee_id=r.employee_id and r.role_id=ro.role_id and
+		ro.role_id=rt.role_id
+		and rt.authority_id=au.authority_id and
+		e.employee_id=#{0} and
+		au.AUTHORITY_TYPE=1
+		and au.AUTHORITY_PARENT_ID is
+		not null
+		order by AUTHORITY_LEVEL
+	</select>
+
+
+</mapper>

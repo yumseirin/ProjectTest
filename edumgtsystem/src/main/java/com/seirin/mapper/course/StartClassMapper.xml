@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seirin.dao.course.StartClassDaoInf">
+
+	<!-- 查询所有符合条件的讲师 -->
+	<select id="selectClasstutor"
+		parameterType="com.seirin.vo.course.StartClass"
+		resultType="com.seirin.vo.employee.Employee">
+		select e.*
+		from EMPLOYEE e,EMPLOYEE_ROLE er,ROLE r
+		where
+		e.employee_id = er.employee_id and er.role_id = r.role_id
+		and
+		e.employee_tech=#{tech_id} and e.employee_area=#{startclass_region}
+		and r.role_name= '讲师'
+	</select>
+	<!-- 查询所有符合条件的助教 -->
+	<select id="selectTeahingassient"
+		parameterType="com.seirin.vo.course.StartClass"
+		resultType="com.seirin.vo.employee.Employee">
+		select e.*
+		from EMPLOYEE e,EMPLOYEE_ROLE er,ROLE r
+		where
+		e.employee_id = er.employee_id and er.role_id = r.role_id
+		and
+		e.employee_tech=#{tech_id} and e.employee_area=#{startclass_region}
+		and r.role_name= '助教'
+	</select>
+	<!-- 查询所有符合条件的班主任 -->
+	<select id="selectTeacher"
+		parameterType="com.seirin.vo.course.StartClass"
+		resultType="com.seirin.vo.employee.Employee">
+		select e.*
+		from EMPLOYEE e,EMPLOYEE_ROLE er,ROLE r
+		where
+		e.employee_id = er.employee_id and er.role_id = r.role_id
+		and
+		e.employee_tech=#{tech_id} and e.employee_area=#{startclass_region}
+		and r.role_name= '班主任'
+	</select>
+	<!-- 查询符合条件的教室 -->
+	<select id="selectClassRoomByStartClass"
+		parameterType="com.seirin.vo.course.StartClass"
+		resultType="com.seirin.vo.course.ClassRoom">
+		select *
+		from CLASSROOM
+		where AREA_ID = #{startclass_region}
+		and classroom_cstatus =
+		${@com.seirin.util.MessageUtil@CLASSROM_CSTATUS_KEYONG}
+		and
+		classroom_cpeonumber >= #{startclass_speonumber}
+	</select>
+
+	<!-- 添加开班信息 -->
+	<insert id="addStartClass"
+		parameterType="com.seirin.vo.course.StartClass">
+		<selectKey resultType="int" keyProperty="startclass_sid"
+			order="BEFORE">
+			select startclass_seq.nextval from dual
+		</selectKey>
+		insert into STARTCLASS
+		values
+		(#{startclass_sid},#{tech_id},#{classroom_cid}
+		,#{startclass_sno},#{startclass_speonumber}
+		,#{startclass_sstarttime},#{startclass_sendtime}
+		,#{startclass_teacher},#{startclass_teahingassient}
+		,#{startclass_classtutor},#{startclass_snature}
+		,${@com.seirin.util.MessageUtil@STARTCLASS_STATUS_SHANGKE}
+		,#{startclass_school,jdbcType=VARCHAR},#{startclass_region})
+	</insert>
+
+	<!-- 查询开班最低周数 -->
+	<select id="selectTechTime"
+		parameterType="com.seirin.vo.course.StartClass" resultType="int">
+		select
+		tech_time
+		from
+		TECH
+		where tech_id = #{tech_id}
+	</select>
+
+</mapper>

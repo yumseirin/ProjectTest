@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seirin.dao.employee.EmployeeDaoInf">
+
+	<select id="isLoginNamePwd"
+		parameterType="com.seirin.vo.employee.Employee"
+		resultType="com.seirin.vo.employee.Employee">
+		select *
+		from employee
+		where employee_loginname
+		=#{employee_loginname} and employee_password
+		=#{employee_password}
+	</select>
+
+	<select id="selectEmployee"
+		resultType="com.seirin.vo.employee.Employee">
+
+		select
+		e.employee_id,e.employee_name,e.employee_loginname,e.employee_sex,e.employee_tel,e.employee_level,e.employee_attribute,p.position_name,a.area_name
+		from employee e,position p,department d,area a
+		where
+		e.position_id=p.position_id and p.department_id=d.department_id and
+		d.area_id=a.area_id
+	</select>
+
+	<select id="selectEmployeeByid" parameterType="int"
+		resultType="com.seirin.vo.employee.Employee">
+		select e.*,p.position_name,a.area_name
+		from employee
+		e,position p,department d,area a
+		where employee_id=#{employee_id}
+		and
+		e.position_id=p.position_id
+		and p.department_id=d.department_id
+		and
+		d.area_id=a.area_id
+	</select>
+
+	<insert id="addEmployee"
+		parameterType="com.seirin.vo.employee.Employee">
+		<selectKey resultType="int" keyProperty="employee_id"
+			order="BEFORE">
+			select
+			employee_seq.nextVal
+			from dual
+		</selectKey>
+		insert into
+		Employee(employee_id,position_id,employee_name,employee_loginname,employee_password,employee_tel,employee_wechat,employee_area,employee_level,employee_business,employee_create_time,employee_sex,employee_tech,employee_num,employee_dept)
+		values(#{employee_id},#{position_id},#{employee_name},#{employee_loginname},#{employee_password},#{employee_tel},#{employee_wechat},#{employee_area},#{employee_level},#{employee_business},#{employee_create_time},#{employee_sex},#{employee_tech},0,#{employee_dept})
+	</insert>
+	<update id="updateEmployee"
+		parameterType="com.seirin.vo.employee.Employee">
+		update Employee set
+		POSITION_ID =
+		#{position_id,jdbcType=INTEGER}
+		,RESUME_ID =
+		#{resume_id,jdbcType=INTEGER}
+		,EMPLOYEE_NAME =
+		#{employee_name,jdbcType=VARCHAR}
+		,EMPLOYEE_LOGINNAME =
+		#{employee_loginname,jdbcType=VARCHAR}
+		,EMPLOYEE_PASSWORD =
+		#{employee_password,jdbcType=VARCHAR}
+		,EMPLOYEE_TEL =
+		#{employee_tel,jdbcType=VARCHAR}
+		,EMPLOYEE_WECHAT =
+		#{employee_wechat,jdbcType=VARCHAR}
+		,EMPLOYEE_EMAIL =
+		#{employee_email,jdbcType=VARCHAR}
+		,EMPLOYEE_QQ =
+		#{employee_qq,jdbcType=VARCHAR}
+		,EMPLOYEE_AREA =
+		#{employee_area,jdbcType=INTEGER}
+		,EMPLOYEE_STATUS =
+		#{employee_status,jdbcType=VARCHAR}
+		,EMPLOYEE_ATTRIBUTE =
+		#{employee_attribute,jdbcType=VARCHAR}
+		,EMPLOYEE_LEVEL =
+		#{employee_level,jdbcType=VARCHAR}
+		,EMPLOYEE_BUSINESS =
+		#{employee_business,jdbcType=VARCHAR}
+		,EMPLOYEE_UPDATE_TIME =
+		#{employee_update_time}
+		,EMPLOYEE_SEX =
+		#{employee_sex,jdbcType=VARCHAR}
+		,EMPLOYEE_CODE =
+		#{employee_code,jdbcType=VARCHAR}
+		,EMPLOYEE_TECH =
+		#{employee_tech,jdbcType=INTEGER}
+		,EMPLOYEE_Dept =
+		#{employee_dept,jdbcType=INTEGER}
+		where
+		employee_id=#{employee_id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 修改员工所带班级数 -->
+	<update id="updateEmployeeNumById"
+		parameterType="com.seirin.vo.employee.Employee">
+		update Employee
+		set EMPLOYEE_NUM = #{employee_num}
+		where
+		EMPLOYEE_ID = #{employee_id}
+	</update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seirin.dao.course.CoursesysDaoInf">
+
+	<!-- 查询所有课程体系 -->
+	<select id="selectCoursesys"
+		resultType="com.seirin.vo.course.Coursesys">
+		select c.*,t.tech_tname
+		from COURSESYS c,TECH t
+		where
+		c.tech_id = t.tech_id
+	</select>
+
+	<!-- 根据id查询课程体系 -->
+	<select id="selectCoursesysById" parameterType="int"
+		resultType="com.seirin.vo.course.Coursesys">
+		select c.*,t.tech_tname
+		from COURSESYS c,TECH t
+		where coursesys_csid = #{coursesys_csid}
+		and c.tech_id = t.tech_id
+	</select>
+
+	<!-- 根据tech_id和csid查询课程体系 -->
+	<!-- 如果没有csid就是查询该技术方向的课程体系，有csid就是查询除该id外该技术方向的课程体系 -->
+	<select id="selectCoursesysByTechAndCsid"
+		parameterType="com.seirin.vo.course.Coursesys"
+		resultType="com.seirin.vo.course.Coursesys">
+		select *
+		from COURSESYS
+		where tech_id = #{tech_id}
+		<if test="coursesys_csid != null">
+			and coursesys_csid != #{coursesys_csid}
+		</if>
+	</select>
+
+	<!-- 添加课程体系 -->
+	<insert id="addCoursesys"
+		parameterType="com.seirin.vo.course.Coursesys">
+		<selectKey resultType="int" keyProperty="coursesys_csid"
+			order="BEFORE">
+			select
+			coursesys_seq.nextval
+			from dual
+		</selectKey>
+		insert into COURSESYS
+		values
+		(#{coursesys_csid,jdbcType=INTEGER},#{coursesys_csname,jdbcType=VARCHAR},#{tech_id,jdbcType=INTEGER},#{coursesys_systempath,jdbcType=VARCHAR})
+	</insert>
+
+	<!-- 根据id修改课程体系 -->
+	<update id="updateCoursesysById"
+		parameterType="com.seirin.vo.course.Coursesys">
+		update COURSESYS
+		set
+		coursesys_csname =
+		#{coursesys_csname},
+		tech_id = #{tech_id},
+		coursesys_systempath =
+		#{coursesys_systempath,jdbcType=VARCHAR}
+		where coursesys_csid =
+		#{coursesys_csid}
+	</update>
+
+	<!-- 根据ID删除课程体系 -->
+	<delete id="deleteCoursesysById" parameterType="int">
+		delete from
+		COURSESYS
+		where coursesys_csid = #{coursesys_csid}
+	</delete>
+
+</mapper>
