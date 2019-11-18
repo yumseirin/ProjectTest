@@ -43,6 +43,18 @@
 					+ num;
 		}
 	}
+	//进入详情页面
+	function employeeInfo(){
+		var num = getCheckBoxValue('employee_id');
+		if (num == null || num == "") {
+			alert("请选择要查看详情的员工");
+			return false;
+		} else {
+			window.location.href = path
+					+ "employeeControl/gotoEmployeeInfo.action?employee_id="
+					+ num;
+		}
+	}
 	//进入批量导入页面
 	function daoruEmployee() {
 
@@ -91,11 +103,14 @@
 					id="add" class="abtn"> <img
 					src="<%=basePath%>images/add_btn.png" name="Image1" border="0"
 					id="Image1" />
-				</a> <a href="#" id="update" class="abtn"> <img
+				</a><a href="#" id="revise" class="abtn"> <img
 					src="<%=basePath%>images/revise_btn.png" border="0" id="Image2"
 					onclick="updateEmployee()" />
-				</a> <a href="#" id="update" class="abtn"> <img
-					src="<%=basePath%>images/upload.bmp" border="0" id="Image2"
+				</a><a href="#" id="info" class="abtn"> <img
+					src="<%=basePath%>images/info2.png" border="0" id="Image3"
+					onclick="employeeInfo()" />
+				</a><a href="#" id="upload" class="abtn"> <img
+					src="<%=basePath%>images/upload.bmp" border="0" id="Image4"
 					onclick="daoruEmployee()" />
 				</a>
 

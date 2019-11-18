@@ -85,13 +85,13 @@ public class EmployeeControl {
 	 * @return 用户列表页
 	 */
 	@RequestMapping("selectEmployeePaging")
-	public String selectEmployeePaging(String employee_name,Integer page, Model model) {
+	public String selectEmployeePaging(String employee_name, Integer page, Model model) {
 		String str = "/employee/employeeList";
 		try {
 			// =============================================
 			// 1.当前页： 前台JSP上传过来的页数
 			// 2.如果 当前页<1 ，那么当前页=第1页
-			if (page ==null ||"".equals(page)|| page < 1) {
+			if (page == null || page < 1) {
 				page = Fenye.currentpage;// 获取不到页数就为1
 			}
 			// 3.总记录数 : select count(*) from 表名
@@ -151,6 +151,27 @@ public class EmployeeControl {
 			List<Tech> techlist = TechServiceInf.selectTech();
 			model.addAttribute("techlist", techlist);
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			str = "/error/error";
+		}
+		return str;
+	}
+
+	/**
+	 * 跳转员工详情页面
+	 * 
+	 * @param employee_id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("gotoEmployeeInfo")
+	public String gotoEmployeeInfo(int employee_id, Model model) {
+		String str = "/employee/employeeinfo";
+		try {
+			// 根据员工id,查找员工信息
+			Employee employee = employeeServiceInf.selectEmployeeByid(employee_id);
+			model.addAttribute("employee", employee);
 		} catch (Exception e) {
 			e.printStackTrace();
 			str = "/error/error";

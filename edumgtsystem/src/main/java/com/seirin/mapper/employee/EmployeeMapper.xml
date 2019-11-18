@@ -61,15 +61,15 @@
 
 	<select id="selectEmployeeByid" parameterType="int"
 		resultType="com.seirin.vo.employee.Employee">
-		select e.*,p.position_name,a.area_name
+		select e.*,p.position_name,a.area_name,d.department_name,t.tech_tname
 		from employee
-		e,position p,department d,area a
+		e,position p,department d,area a,tech t
 		where employee_id=#{employee_id}
 		and
 		e.position_id=p.position_id
 		and p.department_id=d.department_id
-		and
-		d.area_id=a.area_id
+		and d.area_id=a.area_id
+		and t.tech_id=e.employee_tech
 	</select>
 
 	<insert id="addEmployee"

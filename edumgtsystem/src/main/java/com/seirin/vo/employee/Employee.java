@@ -34,7 +34,17 @@ public class Employee implements Serializable {
 	private Integer employee_dept; // 员工所属部门
 
 	private String area_name; // 区域名称
+	private String department_name; // 部门名称
 	private String position_name; // 职称名称
+	private String tech_tname; // 技术方向
+
+	public String getTech_tname() {
+		return tech_tname;
+	}
+
+	public void setTech_tname(String tech_tname) {
+		this.tech_tname = tech_tname;
+	}
 
 	public Integer getEmployee_id() {
 		return employee_id;
@@ -210,6 +220,14 @@ public class Employee implements Serializable {
 
 	public void setArea_name(String area_name) {
 		this.area_name = area_name;
+	}
+
+	public String getDepartment_name() {
+		return department_name;
+	}
+
+	public void setDepartment_name(String department_name) {
+		this.department_name = department_name;
 	}
 
 	public String getPosition_name() {

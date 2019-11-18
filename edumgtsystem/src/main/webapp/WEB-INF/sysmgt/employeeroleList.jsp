@@ -14,6 +14,12 @@
 <link rel="stylesheet" href="<%=basePath%>css/base.css" />
 <link rel="stylesheet" href="<%=basePath%>css/info-mgt.css" />
 <link rel="stylesheet" href="<%=basePath%>css/WdatePicker.css" />
+<style type="text/css">
+.chaxunbtn {text-decoration: none;border: solid 1px;	}
+.chaxunbtn {display:inline-table;line-height:24px;padding:0 9px;border-radius:2px;font-family:Arial, Helvetica, sans-serif !important;}
+.chaxunbtn {color: #000000;border-color:#8EB2D2; background:#eaf4fa;}
+.chaxunbtn :hover {color:#023054;border-color:#8EB2D2;background:#B8DFFB;}
+</style>
 <script type="text/javascript"
 	src="<%=basePath%>js/jquery-easyui-1.4.5/jquery.min.js" charset="utf-8"></script>
 <!---------------------------  复选框实现单选js文件  ------------------------------------>
@@ -104,7 +110,7 @@
 					method="post" id="form1">
 					用户姓名：<input type="text" id="employee_name" name="employee_name"
 						class="{required:true}" maxlength="16" /> &nbsp;&nbsp;&nbsp; <a
-						href="javascript:submitName()" class="confirm">查询</a>
+						href="javascript:submitName()" class="chaxunbtn">查询</a>
 				</form>
 			</div>
 			<!-----------    查询条件  end   ---------->
