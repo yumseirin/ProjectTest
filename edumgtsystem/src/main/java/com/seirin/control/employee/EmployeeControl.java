@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.seirin.service.area.AreaServiceInf;
 import com.seirin.service.area.DepartmentServiceInf;
@@ -20,6 +21,7 @@ import com.seirin.vo.area.Area;
 import com.seirin.vo.area.Department;
 import com.seirin.vo.area.Position;
 import com.seirin.vo.employee.Employee;
+import com.seirin.vo.employee.Employeeview;
 import com.seirin.vo.employee.Tech;
 import com.seirin.vo.sysmgt.Role;
 
@@ -277,4 +279,23 @@ public class EmployeeControl {
 		}
 		return str;
 	}
+
+	/**
+	 * 统计图
+	 * 
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getdata")
+	public List<Employeeview> getdata() {
+		List<Employeeview> eviewList = null;
+		try {
+			employeeServiceInf.adddata();
+			eviewList = employeeServiceInf.getdata();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return eviewList;
+	}
+
 }

@@ -8,13 +8,32 @@ import org.springframework.stereotype.Service;
 
 import com.seirin.dao.employee.EmployeeDaoInf;
 import com.seirin.vo.employee.Employee;
+import com.seirin.vo.employee.Employeeview;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeServiceInf {
 
 	@Autowired
 	private EmployeeDaoInf employeeDaoInf;
+	
+	/**
+	 * 添加统计图
+	 */
+	public void adddata() {
+		employeeDaoInf.deletedata();
+		List<Employeeview> list =employeeDaoInf.selectEmployeeDistribution();
+		for(Employeeview i:list)
+			employeeDaoInf.adddata(i);
+	}
 
+	/**
+	 * 查询统计图数据
+	 * 
+	 * @return
+	 */
+	public List<Employeeview> getdata(){
+		return employeeDaoInf.getdata();
+	}
 	/**
 	 * 查总记录数
 	 * 

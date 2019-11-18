@@ -26,6 +26,13 @@
 <!---------------------------  复选框实现单选js文件  ------------------------------------>
 <script type="text/javascript" src="<%=basePath%>js/form.js"
 	charset="utf-8"></script>
+<!---------------------------------统计图js文件---------------------------------------->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/charts/fusioncharts.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/charts/fusioncharts.charts.js"
+	charset="utf-8"></script>
 
 <script type="text/javascript">
     var path ="<%=basePath%>";
@@ -74,7 +81,46 @@
 		//var employee_id = $("#employee_id").val();
 		$("#form2").submit();
 	}
+	function reset(){
+		$(" #employee_name").val("");
+	}
 	
+</script>
+<script type="text/javascript">
+function closeshow(){
+	var tongjitu = document.getElementById("tongjitu");
+	tongjitu.style.display="none";
+}
+function show(){ 
+	var tongjitu = document.getElementById("tongjitu");
+	tongjitu.style.display="block";
+	 $.ajax({
+			url : "<%=basePath%>/employeeControl/getdata.action",
+			success : function(data) {		
+				//$.messager.progress('close');
+				FusionCharts.ready(function() {
+					var revenueChart = new FusionCharts({
+						"type" : "pie2d",
+						"renderAt" : "tongjitu",//id的值
+						"width" : "100%",
+						"height" : "400",
+						"dataFormat" : "json",
+						"dataSource": {
+					        "chart": {
+					            "caption": "公司人员分布",
+					            "subCaption": "临清教育集团",
+					            "xAxisName": "区域",
+					            "yAxisName": "员工人数",
+					            "theme": "fint"
+					         },
+					        "data": data
+					      }
+					});
+					revenueChart.render();
+				})
+			}
+		});
+}
 </script>
 </head>
 <body>
@@ -93,6 +139,9 @@
 						class="{required:true}" maxlength="16"
 						value="${requestScope.employee_name}" /> &nbsp;&nbsp;&nbsp; 
 						<a href="javascript:submitName()" class="chaxunbtn" >查询</a>
+						<a href="#" onclick="reset()" class="chaxunbtn">置空</a>
+						<a href="#" onclick="show()" class="chaxunbtn">查看员工分布图</a>
+						<a href="#" onclick="closeshow()" class="chaxunbtn">关闭员工分布图</a>
 				</form>
 			</div>
 			<!-----------    查询条件  end   ---------->
@@ -199,7 +248,8 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	</div><br><br>
+	<div id="tongjitu" style="display:none"></div>
 </body>
 
 </html>

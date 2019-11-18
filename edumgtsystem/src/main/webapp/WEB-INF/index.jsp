@@ -5,9 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>排课系统</title>
+
 <!-- common.jsp引用css和js -->
 <%@ include file="/common/common.jsp"%>
-
+<link rel="stylesheet" href="<%=basePath%>css/index.css" />
 <script type="text/javascript">
 	function addtab(names, url) {
 

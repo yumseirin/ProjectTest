@@ -5,16 +5,40 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.seirin.vo.employee.Employee;
+import com.seirin.vo.employee.Employeeview;
 
 public interface EmployeeDaoInf {
-	
+	/**
+	 * 查询统计图数据
+	 * 
+	 * @return
+	 */
+	public List<Employeeview> getdata();
+
+	/**
+	 * 添加统计数据
+	 */
+	public void adddata(Employeeview employeeview);
+
+	/**
+	 * 删除数据
+	 */
+	public void deletedata();
+
+	/**
+	 * 从员工表和区域表中查数据，为了给统计图提供员工分布数据
+	 * 
+	 * @return
+	 */
+	public List<Employeeview> selectEmployeeDistribution();
+
 	/**
 	 * 查总记录数
 	 * 
 	 * @param employee_name
 	 * @return
 	 */
-	public int selectRowCount(@Param(value="employee_name")String employee_name);
+	public int selectRowCount(@Param(value = "employee_name") String employee_name);
 
 	/**
 	 * 登录验证
@@ -30,7 +54,7 @@ public interface EmployeeDaoInf {
 	 * @return 员工列表页
 	 */
 	public List<Employee> selectEmployee(Employee employee);
-	
+
 	/**
 	 * 分页查询员工+根据员工姓名模糊查询
 	 * 
@@ -39,7 +63,8 @@ public interface EmployeeDaoInf {
 	 * @param endrow
 	 * @return
 	 */
-	public List<Employee> selectEmployeePaging(@Param(value="employee_name")String employee_name, @Param("startrow")int startrow, @Param("endrow")int endrow);
+	public List<Employee> selectEmployeePaging(@Param(value = "employee_name") String employee_name,
+			@Param("startrow") int startrow, @Param("endrow") int endrow);
 
 	/**
 	 * 根据员工id查询员工信息

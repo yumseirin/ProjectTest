@@ -2,6 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.seirin.dao.employee.EmployeeDaoInf">
 
+	<!-- ===================统计图========= -->
+	<select id="getdata"
+		resultType="com.seirin.vo.employee.Employeeview">
+		select label,value
+		from employeeview
+	</select>
+	<insert id="adddata"
+		parameterType="com.seirin.vo.employee.Employeeview">
+		insert into employeeview(label,value)
+		values (#{label},#{value})
+	</insert>
+	<delete id="deletedata">
+		delete from employeeview
+	</delete>
+
+	<select id="selectEmployeeDistribution"
+		resultType="com.seirin.vo.employee.Employeeview">
+		select a.area_name label,count(*) value
+		from employee e,area a
+		where e.employee_area =a.area_id
+		group by a.area_name
+	</select>
+
+
+
 	<!-- 总记录数 -->
 	<select id="selectRowCount" parameterType="String"
 		resultType="int">
@@ -41,7 +66,7 @@
 	<!-- 分页查询员工+根据员工姓名模糊查询 -->
 	<select id="selectEmployeePaging"
 		resultType="com.seirin.vo.employee.Employee">
-		select * from ( 
+		select * from (
 		select rownum rn,tb.* from (
 		select
 		e.employee_id,e.employee_name,e.employee_loginname,e.employee_sex,e.employee_tel,e.employee_level,e.employee_attribute,p.position_name,a.area_name
@@ -55,21 +80,28 @@
 			and e.employee_name like
 			'%${employee_name}%'
 		</if>
-		order by employee_id desc )tb )a 
-		where rn between #{startrow,jdbcType=INTEGER} and #{endrow,jdbcType=INTEGER}
+		order by employee_id desc )tb )a
+		where rn between
+		#{startrow,jdbcType=INTEGER} and
+		#{endrow,jdbcType=INTEGER}
 	</select>
 
 	<select id="selectEmployeeByid" parameterType="int"
 		resultType="com.seirin.vo.employee.Employee">
-		select e.*,p.position_name,a.area_name,d.department_name,t.tech_tname
-		from employee
+		select
+		e.*,p.position_name,a.area_name,d.department_name,t.tech_tname
+		from
+		employee
 		e,position p,department d,area a,tech t
-		where employee_id=#{employee_id}
+		where
+		employee_id=#{employee_id}
 		and
 		e.position_id=p.position_id
-		and p.department_id=d.department_id
+		and
+		p.department_id=d.department_id
 		and d.area_id=a.area_id
-		and t.tech_id=e.employee_tech
+		and
+		t.tech_id=e.employee_tech
 	</select>
 
 	<insert id="addEmployee"

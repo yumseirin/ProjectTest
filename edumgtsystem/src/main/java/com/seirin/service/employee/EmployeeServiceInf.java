@@ -3,8 +3,21 @@ package com.seirin.service.employee;
 import java.util.List;
 
 import com.seirin.vo.employee.Employee;
+import com.seirin.vo.employee.Employeeview;
 
 public interface EmployeeServiceInf {
+
+	/**
+	 * 添加统计图
+	 */
+	public void adddata();
+
+	/**
+	 * 查询统计图数据
+	 * 
+	 * @return
+	 */
+	public List<Employeeview> getdata();
 
 	/**
 	 * 查总记录数
