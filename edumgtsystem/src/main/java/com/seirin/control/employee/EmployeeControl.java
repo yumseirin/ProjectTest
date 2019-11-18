@@ -15,6 +15,7 @@ import com.seirin.service.area.PositionServiceInf;
 import com.seirin.service.employee.EmployeeServiceInf;
 import com.seirin.service.employee.TechServiceInf;
 import com.seirin.service.sysmgt.RoleServiceInf;
+import com.seirin.util.Fenye;
 import com.seirin.vo.area.Area;
 import com.seirin.vo.area.Department;
 import com.seirin.vo.area.Position;
@@ -55,7 +56,7 @@ public class EmployeeControl {
 	@RequestMapping("gotoEmployeeList")
 	public String gotoEmployeeList() {
 		// 先去查，在往页面上带值
-		return "forward:/employeeControl/selectEmployee.action";
+		return "forward:/employeeControl/selectEmployeePaging.action";
 	}
 
 	/**
@@ -64,11 +65,11 @@ public class EmployeeControl {
 	 * @return 用户列表页
 	 */
 	@RequestMapping("selectEmployee")
-	public String selectEmployee(Model model) {
+	public String selectEmployee(Employee employee, Model model) {
 		String str = "/employee/employeeList";
 		try {
 			// 所有员工
-			List<Employee> employeelist = employeeServiceInf.selectEmployee();
+			List<Employee> employeelist = employeeServiceInf.selectEmployee(employee);
 			model.addAttribute("employeelist", employeelist);
 
 		} catch (Exception e) {
@@ -76,7 +77,52 @@ public class EmployeeControl {
 			str = "/error/error";
 		}
 		return str;
+	}
 
+	/**
+	 * 查询所有用户
+	 * 
+	 * @return 用户列表页
+	 */
+	@RequestMapping("selectEmployeePaging")
+	public String selectEmployeePaging(String employee_name,Integer page, Model model) {
+		String str = "/employee/employeeList";
+		try {
+			// =============================================
+			// 1.当前页： 前台JSP上传过来的页数
+			// 2.如果 当前页<1 ，那么当前页=第1页
+			if (page ==null ||"".equals(page)|| page < 1) {
+				page = Fenye.currentpage;// 获取不到页数就为1
+			}
+			// 3.总记录数 : select count(*) from 表名
+			int totalCount = employeeServiceInf.selectRowCount(employee_name);
+			// 4.每页显示多少条 ： 给定一个值就可能
+			int count = Fenye.Onepagecount;
+			// 5.返回总页数=（总记录数-1）/一页显示多少行+1
+			int totalPage = (totalCount - 1) / count + 1;
+			// 6.如果当前页数>总页数，那么当前页=总页数
+			if (page > totalPage) {
+				page = totalPage;
+			}
+			// 7.起始条数=（当前页数-1）*每页要显示的记录数+1
+			int startrow = (page - 1) * count + 1;
+			// 8.结束条数=起始条数+每页要显示的记录数
+			int endrow = startrow + count - 1;
+			// 分页后的数据带到页面显示
+			// =============================================
+			// 所有员工
+			List<Employee> employeelist = employeeServiceInf.selectEmployeePaging(employee_name, startrow, endrow);
+
+			model.addAttribute("employeelist", employeelist);
+			model.addAttribute("totalCount", totalCount);// 总条数
+			model.addAttribute("totalPage", totalPage);// 总页数
+			model.addAttribute("page", page);// 第几页
+			model.addAttribute("employee_name", employee_name);
+		} catch (Exception e) {
+			e.printStackTrace();
+			str = "/error/error";
+		}
+		return str;
 	}
 
 	/**
@@ -103,7 +149,7 @@ public class EmployeeControl {
 			model.addAttribute("positionlist", positionlist);
 			// 把所有技术方向带到页面上
 			List<Tech> techlist = TechServiceInf.selectTech();
-			model.addAttribute("techlist",techlist);
+			model.addAttribute("techlist", techlist);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -167,7 +213,7 @@ public class EmployeeControl {
 	 */
 	@RequestMapping("updateEmployee")
 	public String updateEmployee(Employee employee, HttpSession session) {
-		String str = "forward:/employeeControl/selectEmployee.action";
+		String str = "forward:/employeeControl/gotoEmployeeList.action";
 		try {
 //			Employee users = (Employee)session.getAttribute("user");
 			employeeServiceInf.updateEmployee(employee);

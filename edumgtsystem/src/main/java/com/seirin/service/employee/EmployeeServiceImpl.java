@@ -16,6 +16,16 @@ public class EmployeeServiceImpl implements EmployeeServiceInf {
 	private EmployeeDaoInf employeeDaoInf;
 
 	/**
+	 * 查总记录数
+	 * 
+	 * @param employee_name
+	 * @return
+	 */
+	public int selectRowCount(String employee_name) {
+		return employeeDaoInf.selectRowCount(employee_name);
+	}
+
+	/**
 	 * 登录验证
 	 * 
 	 * @param Employee 员工信息实体类
@@ -32,9 +42,21 @@ public class EmployeeServiceImpl implements EmployeeServiceInf {
 	 * @return 员工列表页
 	 */
 
-	public List<Employee> selectEmployee() {
+	public List<Employee> selectEmployee(Employee employee) {
 
-		return employeeDaoInf.selectEmployee();
+		return employeeDaoInf.selectEmployee(employee);
+	}
+
+	/**
+	 * 分页查询员工+根据员工姓名模糊查询
+	 * 
+	 * @param employee_name
+	 * @param startrow
+	 * @param endrow
+	 * @return
+	 */
+	public List<Employee> selectEmployeePaging(String employee_name, int startrow, int endrow) {
+		return employeeDaoInf.selectEmployeePaging(employee_name, startrow, endrow);
 	}
 
 	/**
@@ -57,7 +79,7 @@ public class EmployeeServiceImpl implements EmployeeServiceInf {
 		employee.setEmployee_create_time(new Date());
 		employeeDaoInf.addEmployee(employee);
 		// 查询出所有员工
-		return employeeDaoInf.selectEmployee();
+		return employeeDaoInf.selectEmployee(employee);
 	}
 
 	/**

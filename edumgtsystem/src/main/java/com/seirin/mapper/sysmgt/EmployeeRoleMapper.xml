@@ -13,7 +13,7 @@
 		left join role ro
 		on r.role_id=ro.role_id
 		<if test="employee_name !=null and employee_name!=''">
-			where e.employee_name like concat('%',#{employee_name,jdbcType=VARCHAR},'%')
+			where e.employee_name like '%${employee_name}%'
 		</if>
 	</select>
 
