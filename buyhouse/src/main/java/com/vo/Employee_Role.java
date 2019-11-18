@@ -2,8 +2,8 @@ package com.vo;
 
 public class Employee_Role {
        
-	    private   Integer role_id;
-		 private   Integer employee_id;
+	    private   Integer role_id;		//角色ID
+		 private   Integer employee_id; //员工ID
 		 
 		public Integer getRole_id() {
 			return role_id;
