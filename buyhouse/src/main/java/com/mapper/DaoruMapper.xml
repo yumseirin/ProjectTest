@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DaoruDaoInf">
+
+
+
+
+	<select id="selectEmployeeByemployee_loginname" parameterType="String"  resultType="com.vo.Employee">
+		select *
+		from Employee
+		where employee_loginname=#{0}
+	</select>
+
+	<insert id="insertEmployee" parameterType="com.vo.Employee">
+   <selectKey resultType="int" keyProperty="employee_id" order="BEFORE">
+			select
+			employee_seq.nextVal
+			from dual
+		</selectKey>
+		insert into Employee(employee_id,employee_loginname,employee_name,employee_password,employee_sex) values(#{employee_id},#{employee_loginname},#{employee_name},#{employee_password},#{employee_sex})
+	</insert>
+
+
+	<update id="updateEmployee" parameterType="com.vo.Employee">
+
+		update Employee  set  employee_name=#{employee_name} ,employee_password=#{employee_password},employee_sex=#{employee_sex}
+		where employee_loginname=#{employee_loginname}
+	</update>
+	
+ <select id="selectDepatByposition"  parameterType="com.vo.Department"   resultType="com.vo.Position">
+		select * 
+       from position 
+       where   department_id=#{department_id}
+	</select>
+	
+	<insert id="insertEmployee_Role" >
+		insert into EMPLOYEE_ROLE(ROLE_ID,EMPLOYEE_ID) values(#{1},#{0})
+	</insert>
+	
+		<insert id="updateEmployee_Role" >
+		     update   employee_role  set  role_id=#{1}
+		      where employee_id=#{0}
+	</insert>
+	
+	<select  id="daochu"  resultType="com.vo.Employee" >
+		select *
+		from employee
+		
+   </select>
+	
+</mapper>

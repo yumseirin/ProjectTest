@@ -1,0 +1,55 @@
+区域模块：
+       quyuList .jsp ：      1) 用到了复选框单选的效果
+                                         2) 得到列表页中复选框的值，带到区域的修改页面中window.location.href = path	+ "/quyuControl/selectQuyuByid.action?area_id="+num;
+      
+       addquyu.jsp：      1)用到了提交按钮在form表单是，用$("#form1").submit()来提交    
+                                         2)表单验证用jquery
+                                       
+      
+      updatequyu.jsp:   
+      
+      
+      
+    部门模块：
+        departmentList.jsp:     1)用到了复选框单选的效果
+                                                  2) 得到列表页中复选框的值，带到区域的修改页面中window.location.href = path	+ "/quyuControl/selectQuyuByid.action?area_id="+num;
+                                                  3)联合查询		
+                                                  select  d.*,a.area_name
+		                                          from DEPARTMENT d,area  a
+                                                  where  d.area_id=a.area_id
+                                                  因为要显示部门表中的内容，所以在部门表的实体类中加一个字段area_name 这样就自动注入了。
+                                                
+        adddepartment.jsp:    1) 要先查出来区域
+        
+        updatedepartment.jsp:  1)先查出区域，在修改页面把数据库中存的区域相对比进行选中。         
+        
+        
+  职称模块：
+        
+      addposition.jsp :      1)页面上中用到了二级联动。二级联动页面上可以用$.post(,,,)方式或$.ajax({ });方式      
+                                            2)后台,返回的是一个集合用Jackjson变成JSON串   
+                                            3)<script type="text/javascript"  src="<%=basePath%>js/position2.js" charset="utf-8"></script>
+                                             三级联动用的position.js，部门这里没有全部。 
+                                             
+     updateposition.jsp :   1)  <script type="text/javascript"  src="<%=basePath%>js/position2.js" charset="utf-8"></script>
+                                                     三级联动用的position.js，部门这里没有全部。                              
+                                              
+     departmentList.jsp：1)在Position实体类中加了
+                                                            private String area_name;                              //区域名称
+	                                                        private String department_name;                //部门名称             
+	                                                        
+	                                          2)  超级连接如调用JS方法，href里要加javascript:否则不好使<a href="javascript:submitPostion()" class="confirm">查询</a>
+                                              3)/如果页面上的二个下拉有一个为“”时，就提交不到后台的方法报400错，所以二个下拉都加了默认值0
+                                            
+                                              4)<script type="text/javascript"  src="<%=basePath%>js/position2.js" charset="utf-8"></script>
+                                                  三级联动用的position2.js ,部门这里有全部。
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                   

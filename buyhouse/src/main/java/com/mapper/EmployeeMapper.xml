@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.EmployeeDaoInf">
+
+
+     <select  id="selectEmployee"   resultType="com.vo.Employee">
+     
+        select  e.employee_id,e.employee_name,e.employee_loginname,e.employee_sex,e.employee_tel,e.employee_level,e.employee_attribute,p.position_name,a.area_name
+        from employee  e,position p,department d,area  a
+       where  e.position_id=p.position_id  and  p.department_id=d.department_id and 
+       d.area_id=a.area_id
+     </select>
+
+     	<insert id="addEmployee" parameterType="com.vo.Employee">
+		<selectKey resultType="int" keyProperty="employee_id" order="BEFORE">
+			select
+			employee_seq.nextVal
+			from dual
+		</selectKey>
+		insert into  Employee(employee_id,position_id,employee_name,employee_loginname,employee_password,employee_tel,employee_wechat,employee_area,employee_level,employee_business,employee_create_time,employee_sex,employee_tech,employee_dept)
+		values(#{employee_id},#{position_id},#{employee_name},#{employee_loginname},#{employee_password},#{employee_tel},#{employee_wechat},#{employee_area},#{employee_level},#{employee_business},#{employee_create_time},#{employee_sex},#{employee_tech},#{employee_dept})
+	</insert>
+</mapper>

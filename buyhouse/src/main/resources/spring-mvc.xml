@@ -26,7 +26,8 @@
 
 	<!-- 静态资源 要配置下，因为拦截器也要拦截这些，配置成静态资源就不拦截了 -->
 	<mvc:resources location="/js/" mapping="/js/**" />
-	
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/images/" mapping="/images/**" />
 	<mvc:resources location="/img/" mapping="/img/**" />
 
 	<!-- 配置sprinMVC拦截器 -->
@@ -37,7 +38,10 @@
 			<!-- exclude 代表什么样的Control不拦截 注册不用拦截 -->
 			<mvc:exclude-mapping path="/userControl/**" />
 			<mvc:exclude-mapping path="/houseControl/**" />
-			
+			<mvc:exclude-mapping path="/roleControl/**" />
+			<mvc:exclude-mapping path="/checkCodeControl/**" />
+			<mvc:exclude-mapping path="/daoRuControl/**" />
+			<mvc:exclude-mapping path="/quyuControl/**" />
 			<bean class="com.iterceptor.SessionInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

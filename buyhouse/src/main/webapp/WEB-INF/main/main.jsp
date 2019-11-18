@@ -44,7 +44,8 @@
  		您好，<font color="red">${sessionScope.uname }</font>
 			<a href="userControl/loginOff.action"> 退出</a>
 		</c:if>
-
+		<a href="paikelogin.jsp">排课系统</a>
+		<a href="paikelogin2.jsp">排课系统2</a>
 		<table width="70%" border="2px" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="center">序号</td>

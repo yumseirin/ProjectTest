@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.RoleDaoInf">
+
+	<insert id="addRole" parameterType="com.vo.Role">
+		<selectKey resultType="int" keyProperty="role_id" order="BEFORE">
+			select
+			role_seq.nextVal
+			from dual
+		</selectKey>
+		insert into
+		role(role_id,role_name,role_state,role_description,role_create_admin,role_create_date)
+		values
+		(#{role_id},#{role_name,jdbcType=VARCHAR},#{role_state,jdbcType=VARCHAR},#{role_description,jdbcType=VARCHAR},#{role_create_admin},#{role_create_date})
+	</insert>
+
+	<select id="selectRole" resultType="com.vo.Role">
+		select *
+		from ROLE
+	</select>
+
+	<select id="selectRoleByid" parameterType="int" resultType="com.vo.Role">
+		select *
+		from role
+		where role_id=#{0}
+	</select>
+	<!-- ==================权限树相关方法 ========================== -->
+
+	<select id="getZhuAuthority" parameterType="int" resultType="com.vo.Authority">
+		select authority_id,authority_name
+		from authority
+		where
+		authority_parent_id is null
+	</select>
+
+	<select id="getZiAuthority" parameterType="int" resultType="com.vo.Authority">
+		select authority_id,authority_name,AUTHORITY_PARENT_ID
+		from
+		authority
+		where
+		AUTHORITY_PARENT_ID=#{0}
+	</select>
+
+	<select id="getAnNiuAuthority" parameterType="int" resultType="com.vo.Authority">
+		select authority_id,authority_name,AUTHORITY_PARENT_ID
+		from
+		authority
+		where AUTHORITY_PARENT_ID=#{0}
+	</select>
+
+	<insert id="addRole_Authority">
+		insert into role_authority values (#{0},#{1})
+	</insert>
+
+	<select id="getAuthIdByRoleid" parameterType="int"
+		resultType="com.vo.Role_Authority">
+		select *
+		from role_authority
+		where role_id=#{0}
+	</select>
+
+	<delete id="deleteAuthority" parameterType="int">
+		delete from
+		role_authority where role_id=#{0}
+	</delete>
+
+	<update id="updateRole" parameterType="com.vo.Role">
+		update role set
+		role_name=#{role_name} ,role_state=#{role_state}
+		,role_description=#{role_description} ,
+		role_update_admin=
+		#{role_update_admin},role_update_date=#{role_update_date}
+		where
+		role_id=#{role_id}
+	</update>
+</mapper>
