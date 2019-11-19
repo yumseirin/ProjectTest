@@ -18,7 +18,10 @@ function checkpwd(){
 	if (employee_password == null || employee_password == "") {
 		$("#employee_passwordmsg").html("<font color='red'>密码不能为空</font>");
 		return false;
-	} else {
+	} else if (!/\w{4,16}/.test(employee_password)) {
+		$("#employee_passwordmsg").html("<font color='red'>4-16位由英文和数字组成</font>");
+		return false;
+	}else {
 		$("#employee_passwordmsg").html("");
 		return true;
 	}

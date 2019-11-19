@@ -102,7 +102,6 @@
 			<tr>
 				<th class="num"></th>
 				<th class="name">角色名称</th>
-				<th class="name">人(数量)</th>
 				<th class="process">角色说明</th>
 				<th class="process">角色状态</th>
 			</tr>
@@ -112,7 +111,6 @@
 						id="role_id" value="${role.role_id}"
 						onClick="javascript:chooseOne(this,'role_id');"></td>
 					<td class="name">${role.role_name}</td>
-					<td class="name">3</td>
 					<td class="name">${role.role_description}</td>
 					<td class="name" id="role_state"><font></font>
 					<c:if test="${role.role_state == 0}">有效</c:if><c:if test="${role.role_state == 1}">无效</c:if></td>

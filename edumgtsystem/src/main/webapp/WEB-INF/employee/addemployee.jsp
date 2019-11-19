@@ -134,6 +134,21 @@
 
 		</tr>
 		<tr>
+			<td width="10" height="30" align="left">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质:
+				<select id="employee_attribute" name="employee_attribute"
+				class="{required:true}" style="color: red"
+				onblur="checkemployee_attribute()">
+					<option value="<%=MessageUtil.EMPLOYEE_ATTRIBUTE_QUANZHI%>">全职</option>
+					<option value="<%=MessageUtil.EMPLOYEE_ATTRIBUTE_JIANZHI%>">兼职</option>
+			</select> <span id="employee_attributemsg" style="color: red"></span>
+			<td width="100" class="inputText">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:<input
+				type="text" id="employee_email" name="employee_email"
+				class="{required:true}" 
+				onblur="checkemployee_email()" /> <span
+				id="employee_emailmsg" style="color: red"></span>
+			</td>
+		</tr>
+		<tr>
 			<td width="10" height="50" align="left">手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机:<input
 				type="text" id="employee_tel" name="employee_tel"
 				class="{required:true}" maxlength="16" onblur="checkemployee_tel()" />

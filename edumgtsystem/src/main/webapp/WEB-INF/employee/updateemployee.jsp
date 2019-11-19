@@ -101,11 +101,11 @@
 					<option value="0">请选择</option>
 					<c:forEach items="${requestScope.departmentlist}" var="dept">
 						<c:if
-							test="${requestScope.employee.employee_area == dept.department_id}">
+							test="${requestScope.employee.employee_dept == dept.department_id}">
 							<option value="${dept.department_id}" selected>${dept.department_name}</option>
 						</c:if>
 						<c:if
-							test="${requestScope.employee.employee_area != dept.department_id}">
+							test="${requestScope.employee.employee_dept != dept.department_id}">
 							<option value="${dept.department_id}">${dept.department_name}</option>
 						</c:if>
 					</c:forEach>
@@ -186,6 +186,27 @@
 							selected>不接受</option>
 					</c:if>
 			</select> <span id="employee_businessmsg" style="color: red"></span>
+			</td>
+		</tr>
+		<tr>
+			<td width="10" height="30" align="left">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质:
+				<select id="employee_attribute" name="employee_attribute"
+				class="{required:true}" style="color: red"
+				onblur="checkemployee_attribute()">
+				<c:if test="${requestScope.employee.employee_attribute == 0}">
+					<option value="<%=MessageUtil.EMPLOYEE_ATTRIBUTE_QUANZHI%>" selected>全职</option>
+					<option value="<%=MessageUtil.EMPLOYEE_ATTRIBUTE_JIANZHI%>">兼职</option>
+				</c:if>
+				<c:if test="${requestScope.employee.employee_attribute == 1}">
+					<option value="<%=MessageUtil.EMPLOYEE_ATTRIBUTE_QUANZHI%>">全职</option>
+					<option value="<%=MessageUtil.EMPLOYEE_ATTRIBUTE_JIANZHI%>" selected>兼职</option>
+				</c:if>
+			</select> <span id="employee_attributemsg" style="color: red"></span>
+			<td width="100" class="inputText">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:<input
+				type="text" id="employee_email" name="employee_email"
+				class="{required:true}"  value="${requestScope.employee.employee_email }"
+				onblur="checkemployee_email()" /> <span
+				id="employee_emailmsg" style="color: red"></span>
 			</td>
 		</tr>
 		<tr>

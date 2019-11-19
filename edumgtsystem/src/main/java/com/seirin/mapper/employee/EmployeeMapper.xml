@@ -50,7 +50,7 @@
 		parameterType="com.seirin.vo.employee.Employee"
 		resultType="com.seirin.vo.employee.Employee">
 		select
-		e.employee_id,e.employee_name,e.employee_loginname,e.employee_sex,e.employee_tel,e.employee_level,e.employee_attribute,p.position_name,a.area_name
+		e.employee_id,e.employee_name,e.employee_loginname,e.employee_sex,e.employee_tel,e.employee_level,e.employee_attribute,e.employee_email,p.position_name,a.area_name
 		from employee e,position p,department d,area a
 		where
 		e.position_id=p.position_id
@@ -113,8 +113,8 @@
 			from dual
 		</selectKey>
 		insert into
-		Employee(employee_id,position_id,employee_name,employee_loginname,employee_password,employee_tel,employee_wechat,employee_area,employee_level,employee_business,employee_create_time,employee_sex,employee_tech,employee_num,employee_dept)
-		values(#{employee_id},#{position_id},#{employee_name},#{employee_loginname},#{employee_password},#{employee_tel},#{employee_wechat},#{employee_area},#{employee_level},#{employee_business},#{employee_create_time},#{employee_sex},#{employee_tech},0,#{employee_dept})
+		Employee(employee_id,position_id,employee_name,employee_loginname,employee_password,employee_tel,employee_wechat,employee_area,employee_level,employee_business,employee_create_time,employee_sex,employee_tech,employee_num,employee_dept,employee_email,employee_attribute,employee_status)
+		values(#{employee_id},#{position_id},#{employee_name},#{employee_loginname},#{employee_password},#{employee_tel},#{employee_wechat},#{employee_area},#{employee_level},#{employee_business},#{employee_create_time},#{employee_sex},#{employee_tech},0,#{employee_dept},#{employee_email},#{employee_attribute},1)
 	</insert>
 	<update id="updateEmployee"
 		parameterType="com.seirin.vo.employee.Employee">

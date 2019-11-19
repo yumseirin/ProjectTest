@@ -36,7 +36,10 @@
 		if (classroom_cpeonumber == null || classroom_cpeonumber == "") {
 			$("#peonumbermsg").html("<font color='red'>教室容纳人数不能为空</font>");
 			return false;
-		} else {
+		} else if (!/^[1-9][0-9]*$/.test(classroom_cpeonumber)){
+			$("#peonumbermsg").html("<font color='red'>请输入非零正整数！</font>");
+			return false;
+		}else {
 			$("#peonumbermsg").html("");
 			return true;
 		}

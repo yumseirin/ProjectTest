@@ -308,6 +308,9 @@ function checkstartclass_speonumber() {
 	if (startclass_speonumber == null || startclass_speonumber == "") {
 		$("#startclass_speonumbermsg").html("<font color='red'>人数不能为空</font>");
 		return false;
+	} else if (!/^[1-9][0-9]*$/.test(startclass_speonumber)){
+		$("#startclass_speonumbermsg").html("<font color='red'>请输入非零正整数！</font>");
+		return false;
 	} else {
 		$("#startclass_speonumbermsg").html("");
 		return true;

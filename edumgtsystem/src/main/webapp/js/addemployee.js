@@ -125,8 +125,10 @@ function checkemployee_name() {
 	if (employee_name == null || employee_name == "") {
 		$("#employee_namemsg").html("<font color='red'>姓名不能为空</font>");
 		return false;
+	}else if (!/^([\u4e00-\u9fa5]{1,20}|[a-zA-Z\\.\\s]{1,20})$/.test(employee_name)) {
+		$("#employee_namemsg").html("<font color='red'>请输入纯英文或中文，不得超过20位</font>");
+		return false;
 	} else {
-
 		$("#employee_namemsg").html("");
 		return true;
 	}
@@ -151,6 +153,9 @@ function checkemployee_loginname() {
 	if (employee_loginname == null || employee_loginname == "") {
 		$("#employee_loginnamemsg").html("<font color='red'>用户名不能为空</font>");
 		return false;
+	}else if (!/[a-zA-Z]\w{4,16}/.test(employee_loginname)) {
+		$("#employee_loginnamemsg").html("<font color='red'>4-16位由英文开头，英文和数字组成</font>");
+		return false;
 	} else {
 		$("#employee_loginnamemsg").html("");
 		return true;
@@ -164,7 +169,10 @@ function checkemployee_password() {
 	if (employee_password == null || employee_password == "") {
 		$("#employee_passwordmsg").html("<font color='red'>密码不能为空</font>");
 		return false;
-	} else {
+	} else if (!/\w{4,16}/.test(employee_password)) {
+		$("#employee_passwordmsg").html("<font color='red'>4-16位由英文和数字组成</font>");
+		return false;
+	}else {
 		$("#employee_passwordmsg").html("");
 		return true;
 	}
@@ -256,8 +264,39 @@ function checkemployee_tel() {
 	if (employee_tel == null || employee_tel == "") {
 		$("#employee_telmsg").html("<font color='red'>手机不能为空</font>");
 		return false;
+	}else if (!/^1(3|4|5|7|8)\d{9}$/.test(employee_tel)) {
+		$("#employee_telmsg").html("<font color='red'>请输入13\\14\\15\\17\\18开头的11位数字</font>");
+		return false;
 	} else {
 		$("#employee_telmsg").html("");
+		return true;
+	}
+}
+
+//性质验证
+function checkemployee_attribute() {
+
+	var employee_attribute = $("#employee_attribute").val();
+	if (employee_attribute == null || employee_attribute == "") {
+		$("#employee_attributemsg").html("<font color='red'>性质不能为空</font>");
+		return false;
+	} else {
+		$("#employee_attributemsg").html("");
+		return true;
+	}
+}
+
+//邮箱验证
+function checkemployee_email(){
+	var employee_email = $("#employee_email").val();
+	if (employee_email == null || employee_email == "") {
+		$("#employee_emailmsg").html("<font color='red'>邮箱不能为空</font>");
+		return false;
+	} else if (!/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})*$/.test(employee_email)) {
+		$("#employee_emailmsg").html("<font color='red'>邮箱格式不对！</font>");
+		return false;
+	} else {
+		$("#employee_emailmsg").html("");
 		return true;
 	}
 }
@@ -297,6 +336,9 @@ function validate() {
 	if (!checkemployee_tel()) { // 手机验证
 		b = false; // alert(5);
 	}
+	if (!checkemployee_email()){//邮箱验证
+		b = false;
+	}
 	if (!checkemployee_wechat()) { // 微信验证
 		b = false; // alert(6);
 	}
@@ -320,7 +362,7 @@ function validate() {
 	}
 
 	if (b == true) {
-		alert("提交");
+		//alert("提交");
 		// form表单的id, 提交表单
 		$("#form1").submit();
 		// 如下写法不要用，这样虽然请求可以提交过去，但数据传不到后台。

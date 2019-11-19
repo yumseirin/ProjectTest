@@ -152,7 +152,14 @@
 						onClick="javascript:chooseOne(this,'employee_id');"></td>
 					<td class="name">${employeerole.employee_name}</td>
 					<td class="name">${employeerole.employee_loginname}</td>
-					<td class="process">${employeerole.role_name}</td>
+					<td class="process"><c:choose>
+					<c:when test="${employeerole.role_name==null}">
+					普通员工
+					</c:when>
+					<c:otherwise>
+					${employeerole.role_name}
+					</c:otherwise>
+					</c:choose></td>
 					<td class="process" id="employee_status"><c:if test="${employeerole.employee_status == 1}">可用</c:if> <c:if test="${employeerole.employee_status == 0}">禁用</c:if></td>
 				</tr>
 			</c:forEach>

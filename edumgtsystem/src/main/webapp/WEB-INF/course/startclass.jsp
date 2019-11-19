@@ -103,7 +103,7 @@
 					<input
 						type="text" id="startclass_sstarttime"
 						name="startclass_sstarttime" class="{required:true}"
-						maxlength="16" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+						maxlength="16" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:new Date()})"
 						onblur="checkstartclass_sstarttime()" /> <span
 						id="startclass_sstarttimemsg" style="color: red"></span>
 					</td>
@@ -111,7 +111,7 @@
 					<input
 						type="text" id="startclass_sendtime" name="startclass_sendtime"
 						class="{required:true}" maxlength="16"
-						onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+						onClick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:new Date()})"
 						onblur="tech_time()" /> <span
 						id="startclass_sendtimemsg" style="color: red"></span>
 					</td>
