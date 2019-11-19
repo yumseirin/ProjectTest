@@ -32,27 +32,6 @@
 		}
 	}
 </script>
-
-<script type="text/javascript">
-	function piliangdaoru() {
-		$.ajax({
-			url : "${pageContext.request.contextPath}"
-					+ "/daoRuControl/daoru.action",
-			type : "POST",
-			cache : false,
-			data : new FormData($('#form1')[0]),
-			processData : false,
-			contentType : false,
-			dataType : "json",
-			success : function(data) {
-				alert(data.msg);
-			},
-			error : function(jqXHR) {
-				alert("发生错误：" + jqXHR.status);
-			}
-		});
-	}
-</script>
 </head>
 <!--手册 Layout（布局）里-->
 <body class="easyui-layout">

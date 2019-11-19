@@ -15,6 +15,7 @@ import com.seirin.service.area.DepartmentServiceInf;
 import com.seirin.service.area.PositionServiceInf;
 import com.seirin.service.employee.EmployeeServiceInf;
 import com.seirin.service.employee.TechServiceInf;
+import com.seirin.service.sysmgt.EmployeeRoleServiceInf;
 import com.seirin.service.sysmgt.RoleServiceInf;
 import com.seirin.util.Fenye;
 import com.seirin.vo.area.Area;
@@ -22,6 +23,7 @@ import com.seirin.vo.area.Department;
 import com.seirin.vo.area.Position;
 import com.seirin.vo.employee.Employee;
 import com.seirin.vo.employee.Employeeview;
+import com.seirin.vo.employee.JsonStr;
 import com.seirin.vo.employee.Tech;
 import com.seirin.vo.sysmgt.Role;
 
@@ -49,6 +51,9 @@ public class EmployeeControl {
 
 	@Autowired
 	private RoleServiceInf roleServiceInf;// 角色
+
+	@Autowired
+	private EmployeeRoleServiceInf employeeRoleServiceInf;// 员工角色
 
 	/**
 	 * 跳转到用户管理列表页
@@ -296,6 +301,62 @@ public class EmployeeControl {
 			e.printStackTrace();
 		}
 		return eviewList;
+	}
+
+	/**
+	 * 跳转修改密码页面
+	 * 
+	 * @param employee_id
+	 * @return
+	 */
+	@RequestMapping("gotoChangePwd")
+	public String gotoChangePwd(HttpSession session, Model model) {
+		Employee em = (Employee) session.getAttribute("user");
+		int employee_id = em.getEmployee_id();
+		model.addAttribute("employee_id", employee_id);
+		return "/employee/changepwd";
+	}
+
+	
+	@RequestMapping("yzOld_pwd")
+	@ResponseBody
+	public JsonStr yzOld_pwd(String old_password, HttpSession session, Model model) {
+		JsonStr json = new JsonStr();
+		try {
+			Employee em = (Employee) session.getAttribute("user");
+			System.out.println(em.getEmployee_password());
+			if (em.getEmployee_password() == old_password) {
+				json.setSuccess(true);
+			} else {
+				json.setSuccess(false);
+				json.setMsg("密码错误");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			json.setSuccess(false);
+		}
+		System.out.println(json);
+		return json;
+	}
+
+	/**
+	 * 修改密码
+	 * 
+	 * @param employee
+	 * @return
+	 */
+	@RequestMapping("changePwd")
+	public String changePwd(Employee employee, HttpSession session, Model model) {
+		String str = "";
+
+		try {
+				employeeRoleServiceInf.updateEmployeePwd(employee);
+		} catch (Exception e) {
+			e.printStackTrace();
+			str = "/error/error";
+		}
+		return str;
 	}
 
 }

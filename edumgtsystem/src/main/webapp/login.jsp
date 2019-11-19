@@ -46,19 +46,19 @@ if (window != top)
 		//用户名验证
 		var employee_loginname = $("#employee_loginname").val();
 		if (employee_loginname == null || employee_loginname == "") {
-			$("#employee_loginnamemsg")
+			$("#codemsg")
 					.html("<font color='red'>用户名不能为空</font>");
 			return false;
 		} else {
-			$("#employee_loginnamemsg").html("");
+			$("#codemsg").html("");
 		}
 		//密码验证
 		var employee_password = $("#employee_password").val();
 		if (employee_password == null || employee_password == "") {
-			$("#employee_passwordmsg").html("<font color='red'>密码不能为空</font>");
+			$("#codemsg").html("<font color='red'>密码不能为空</font>");
 			return false;
 		} else {
-			$("#employee_passwordmsg").html("");
+			$("#codemsg").html("");
 		}
 		//校验码验证
 		var code = $("#code").val();
@@ -105,9 +105,14 @@ if (window != top)
 		},
 				function(data) {
 					if (data != null && data != "") {
+						if(data.employee_status == 1){
 						//跳转到WEB-INF下index.jsp页面
 						window.location.href = prjContextPath
 								+ "/loginControl/gotoIndex.action";
+						}else{
+							$("#codemsg").html(
+							"<font color='red'>该用户不可用，请联系管理员！</font>");
+						}
 					} else {
 						//用户把用户名密码输入的不正确，所以没法登录
 						$("#codemsg").html(
@@ -148,8 +153,8 @@ if (window != top)
 					<!-- 一进入页面，通过src自动调用控制层生成证验码 --> 
 					<cite><img id="imageCode"
 					src="<%=request.getContextPath()%>/checkCodeControl/getImage.action"
-					title="看不清，点击换一张" style="cursor: pointer;" width="100%" height="100%"/><span id="codemsg"></span>
-					</cite>
+					title="看不清，点击换一张" style="cursor: pointer;" width="100%" height="100%"/>
+					</cite><div id="codemsg"></div>
 				</li>
 				<li><input type="button" class="loginbtn" id="submit" value="提交"
 					onclick="valicheckFrom()"></li>
