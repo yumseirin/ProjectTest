@@ -34,6 +34,7 @@ public class StartClass implements Serializable {
 	private String teacher_name;// 班主任
 	private String tech_tname; // 技术方向名称
 
+
 	public Integer getStartclass_sid() {
 		return startclass_sid;
 	}

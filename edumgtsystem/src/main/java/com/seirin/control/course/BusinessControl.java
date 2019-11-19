@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.seirin.service.course.BusinessServiceInf;
+import com.seirin.service.course.ClassRoomServiceInf;
 import com.seirin.vo.course.ClassCourse;
+import com.seirin.vo.course.ClassRoom;
 import com.seirin.vo.course.StartClass;
 
 @Controller
@@ -17,6 +19,9 @@ public class BusinessControl {
 
 	@Autowired
 	private BusinessServiceInf businessServiceInf;
+	
+	@Autowired
+	private ClassRoomServiceInf classRoomServiceInf;
 
 	/**
 	 * 去所有班级页面
@@ -40,6 +45,9 @@ public class BusinessControl {
 		try {
 			List<StartClass> startclasslist = businessServiceInf.selectClasses();
 			model.addAttribute("startclasslist", startclasslist);
+			// 把教室带到页面
+			List<ClassRoom> classroomlist = classRoomServiceInf.selectClassRoom();
+			model.addAttribute("classroomlist", classroomlist);
 		} catch (Exception e) {
 			e.printStackTrace();
 			str = "/error/error";

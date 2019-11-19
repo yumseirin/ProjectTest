@@ -53,7 +53,13 @@
 						id="startclass_sid" value="${startclass.startclass_sid}"
 						onClick="javascript:chooseOne(this,'startclass_sid');"></td>
 					<td class="name">${startclass.startclass_sno}</td>
-					<td class="name">${startclass.classroom_cid}</td>
+					<td class="name">
+					<c:forEach items="${requestScope.classroomlist }" var="classroom">
+					<c:if test="${startclass.classroom_cid ==classroom.classroom_cid}">
+						${classroom.classroom_cname}
+					</c:if>
+					</c:forEach>
+					</td>
 					<td class="name">${startclass.startclass_speonumber}</td>
 					<td class="process">${startclass.tech_tname}</td>
 					<td class="process">${startclass.classtutor_name}</td>
