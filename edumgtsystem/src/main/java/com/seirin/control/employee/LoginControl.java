@@ -57,7 +57,6 @@ public class LoginControl {
 			List<Authority> oneList = employeeRoleServiceInf.selectOne(em.getEmployee_id());
 			List<Authority> twoList = employeeRoleServiceInf.selectTwo(em.getEmployee_id());
 			List<Authority> threeList = employeeRoleServiceInf.selectThree(em.getEmployee_id());
-
 			ServletContext sc = session.getServletContext();
 			sc.setAttribute("oneFenlei", oneList);
 			sc.setAttribute("twoFenlei", twoList);
