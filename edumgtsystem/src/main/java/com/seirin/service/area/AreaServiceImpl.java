@@ -52,5 +52,12 @@ public class AreaServiceImpl implements AreaServiceInf {
 	public void updateArea(Area area) {
 		areaDaoInf.updatearea(area);
 	}
+	
+	public Area validate(String area_code) {
+		return areaDaoInf.validate(area_code);
+	}
+	public Area validate2(String area_name) {
+		return areaDaoInf.validate2(area_name);
+	}
 
 }

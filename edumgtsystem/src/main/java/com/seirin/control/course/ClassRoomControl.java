@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.seirin.service.area.AreaServiceInf;
 import com.seirin.service.course.ClassRoomServiceInf;
 import com.seirin.vo.area.Area;
 import com.seirin.vo.course.ClassRoom;
+import com.seirin.vo.course.StartClass;
 
 /**
  * @Description: 教室管理
@@ -112,7 +114,7 @@ public class ClassRoomControl {
 		}
 		return str;
 	}
-	
+
 	/**
 	 * 根据教室id,查找教室信息
 	 * 
@@ -133,7 +135,7 @@ public class ClassRoomControl {
 		}
 		return str;
 	}
-	
+
 	/**
 	 * 根据教室id,修改教室信息
 	 * 
@@ -153,6 +155,27 @@ public class ClassRoomControl {
 			str = "/error/error";
 		}
 		return str;
+	}
+
+	/**
+	 * 查询该教室是否在正在上课的班级中
+	 * 
+	 * @param classroom
+	 * @return
+	 */
+	@RequestMapping("selectclassroominclasses")
+	@ResponseBody
+	public String selectclassroominclasses(ClassRoom classroom) {
+		StartClass startclass = classRoomServiceInf.selectclassroominclasses(classroom.getClassroom_cid());
+		if (startclass != null) {
+			System.out.println("返回1");
+			return "{\"success\":1}";
+		}
+
+		else {
+			System.out.println("返回0");
+			return "{\"success\":0}";
+		}
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.seirin.dao.course.ClassRoomDaoInf;
 import com.seirin.vo.course.ClassRoom;
+import com.seirin.vo.course.StartClass;
 
 @Service
 public class ClassRoomServiceImpl implements ClassRoomServiceInf {
@@ -59,5 +60,15 @@ public class ClassRoomServiceImpl implements ClassRoomServiceInf {
 	 */
 	public void updateClassRoom(ClassRoom classroom) {
 		classRoomDaoInf.updateClassRoom(classroom);
+	}
+	
+	/**
+	 * 查询该教室是否在正在上课的班级中
+	 * 
+	 * @param classroom
+	 * @return
+	 */
+	public StartClass selectclassroominclasses(int classroom_cid) {
+		return classRoomDaoInf.selectclassroominclasses(classroom_cid);
 	}
 }

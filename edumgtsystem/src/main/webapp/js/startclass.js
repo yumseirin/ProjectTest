@@ -347,39 +347,25 @@ function validate() {
 
 	if (!checktech_id()) { // 技术方向验证
 		b = false; // alert(2);
-	}
-	if (!checkstartclass_region()) {// 所属区域验证
-
+	}if (!checkstartclass_region()) {// 所属区域验证
 		b = false; // alert(1);
-	}
-
-	if (!checkstartclass_snature()) { // 班级性质验证
+	}if (!checkstartclass_snature()) { // 班级性质验证
 		b = false; // alert(3);
-	}
-	if (!checkstartclass_classtutor()) { // 讲师验证
+	}if (!checkstartclass_classtutor()) { // 讲师验证
 		b = false; // alert(4);
-	}
-	if (!checkstartclass_teahingassient()) { // 助教验证
+	}if (!checkstartclass_teahingassient()) { // 助教验证
 		b = false; // alert(5);
-	}
-	if (!checkstartclass_teacher()) { // 班主任验证
+	}if (!checkstartclass_teacher()) { // 班主任验证
 		b = false; // alert(6);
-	}
-	if (!checkstartclass_sstarttime()) { // 开班日期验证
+	}if (!checkstartclass_sstarttime()) { // 开班日期验证
 		b = false; // alert(7);
-	}
-	if (!checkstartclass_sendtime()) { // 结束日期验证
+	}if (!checkstartclass_sendtime()) { // 结束日期验证
 		b = false; // alert(8);
-	}
-	if (!checkstartclass_speonumber()) { // 人数验证
+	}if (!checkstartclass_speonumber()) { // 人数验证
 		b = false; // alert(9);
+	}if (!checkclassroom_cid()) { // 教室验证
+		b = false; //alert(10);
 	}
-	if (!checkclassroom_cid()) { // 教室验证
-		b = false; // alert(10);
-	}if(!tech_time()){ //验证开班周数
-		b = false;
-	}
-
 	if (b == true) {
 		alert("提交");
 		// form表单的id, 提交表单

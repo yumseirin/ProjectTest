@@ -31,11 +31,37 @@
 
 <script type="text/javascript">
     var path ="<%=basePath%>";
+    
+    function disclassroom(){
+    	var classroom_cid = getCheckBoxValue('classroom_cid');
+   	 	$.ajax({
+   			type : "POST",
+   			url : path + "/classRoomControl/selectclassroominclasses.action",
+   			data : {
+   				classroom_cid : classroom_cid,
+   			},
+   			dataType : "json",
+   			success : function(data) {
+   				if (data.success == 1) {
+   					alert("该教室正在使用中不可更改！");
+   					flag= false;
+   				}
+   				
+   				if (data.success == 0) {
+   					flag= true;	
+   				}
+   			}
+   		});
+   	 return flag;
+    }
 
 	//进入修改页面
 	function updateClassRoom() {
 
 		var num = getCheckBoxValue('classroom_cid');
+		if(!disclassroom()){
+			return false;
+		}
 		if (num == null || num == "") {
 			alert("请选择要修改的教室");
 			return false;

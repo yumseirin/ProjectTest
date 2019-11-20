@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.seirin.service.area.AreaServiceInf;
 import com.seirin.vo.area.Area;
 
@@ -113,6 +115,37 @@ public class AreaControl {
 			str = "/error/error";
 		}
 		return str;
+	}
+	
+	@RequestMapping("validate")
+	@ResponseBody
+	public String validate(String area_code) {
+		System.out.println("-------------");
+		Area area = areaServiceInf.validate(area_code);
+		if (area != null) {
+			System.out.println("返回1");
+			return "{\"success\":1}";
+		}
+
+		else {
+			System.out.println("返回0");
+			return "{\"success\":0}";
+		}
+	}
+	@RequestMapping("validate2")
+	@ResponseBody
+	public String validate2(String area_name) {
+		System.out.println("-------------");
+		Area area = areaServiceInf.validate2(area_name);
+		if (area != null) {
+			System.out.println("返回1");
+			return "{\"success\":1}";
+		}
+
+		else {
+			System.out.println("返回0");
+			return "{\"success\":0}";
+		}
 	}
 
 	/*

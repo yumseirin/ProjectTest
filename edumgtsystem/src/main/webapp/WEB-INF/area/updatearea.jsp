@@ -20,12 +20,15 @@
  var path="<%=basePath%>";
 	//区域名称验证
 	function checkname() {
+		var oldname = "${requestScope.area.area_name}";
 		var area_name = $("#area_name").val();
 		if (area_name == null || area_name == "") {
 			$("#namemsg").html("<font color='red'>区域名称不能为空</font>");
 			return false;
 		} else {
-
+			if (oldname != area_name) {
+				test2();
+			}
 			$("#namemsg").html("");
 			return true;
 		}
@@ -43,17 +46,63 @@
 		}
 	}
 
+	function test() {
+
+		var area_code = $("#area_code").val();
+		$.ajax({
+			type : "POST",
+			url : path + "/areaControl/validate.action",
+			data : {
+				area_code : area_code,
+			},
+			dataType : "json",
+			success : function(data) {
+				if (data.success == 1) {
+					$("#codemsg").html("<font color='red'>编码已经存在</font>");
+					flag = false;
+				}
+
+				if (data.success == 0) {
+					$("#codemsg").html("<font color='green'>编码可以使用</font>");
+					flag = true;
+				}
+			}
+		});
+		return flag;
+	}
+	function test2() {
+
+		var area_name = $("#area_name").val();
+		$.ajax({
+			type : "POST",
+			url : path + "/areaControl/validate2.action",
+			data : {
+				area_name : area_name,
+			},
+			dataType : "json",
+			success : function(data) {
+				if (data.success == 1) {
+					$("#namemsg").html("<font color='red'>区域已经存在</font>");
+					flag2 = false;
+				}
+
+				if (data.success == 0) {
+					$("#namemsg").html("<font color='green'>名称可以使用</font>");
+					flag2 = true;
+				}
+			}
+		});
+		return flag2;
+	}
+
 	function validate() {
 		var b = true;
 		if (!checkname()) {
 			b = false
 		}
-		;
 		if (!checkcode()) {
 			b = false
 		}
-		;
-
 		if (b == true) {
 			//form表单的id, 提交表单 
 			$("#form1").submit();

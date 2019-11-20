@@ -2,7 +2,10 @@ package com.seirin.dao.course;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.seirin.vo.course.ClassRoom;
+import com.seirin.vo.course.StartClass;
 
 public interface ClassRoomDaoInf {
 
@@ -43,4 +46,20 @@ public interface ClassRoomDaoInf {
 	 * @param classroom
 	 */
 	public void updateClassRoom(ClassRoom classroom);
+	
+	/**
+	 * 修改教室状态
+	 * 
+	 * @param classroom_cid
+	 * @param classroom_cstatus
+	 */
+	public void updateClassRoomStatus(@Param(value="classroom_cid")int classroom_cid,@Param(value="classroom_cstatus") String classroom_cstatus);
+	
+	/**
+	 * 查询该教室是否在正在上课的班级中
+	 * 
+	 * @param classroom
+	 * @return
+	 */
+	public StartClass selectclassroominclasses(int classroom_cid);
 }

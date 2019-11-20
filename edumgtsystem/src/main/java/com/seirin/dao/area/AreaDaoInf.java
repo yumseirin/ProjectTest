@@ -28,5 +28,8 @@ public interface AreaDaoInf {
 	public Area selectAreaByid(int area_id);
 
 	public void updatearea(Area area);
+	
+	public Area validate(String area_code);
+	public Area validate2(String area_name);
 
 }

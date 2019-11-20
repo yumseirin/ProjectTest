@@ -46,7 +46,7 @@ public interface StartClassDaoInf {
 	 * @param startclass
 	 */
 	public void addStartClass(StartClass startclass);
-	
+
 	/**
 	 * 查找该方向开班最低周数
 	 * 
@@ -54,4 +54,5 @@ public interface StartClassDaoInf {
 	 * @return
 	 */
 	public int selectTechTime(StartClass startclass);
+
 }

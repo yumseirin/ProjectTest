@@ -20,7 +20,8 @@ public class StartClassServiceImpl implements StartClassServiceInf {
 
 	@Autowired
 	private EmployeeDaoInf employeeDaoInf;
-	
+
+//	private ClassRoomDaoInf classRoomDaoInf;
 
 	/**
 	 * 查询所有符合条件的讲师
@@ -88,8 +89,11 @@ public class StartClassServiceImpl implements StartClassServiceInf {
 		Employee teacher = employeeDaoInf.selectEmployeeByid(teacher_id);
 		teacher.setEmployee_num(teacher.getEmployee_num() + 1);
 		employeeDaoInf.updateEmployeeNumById(teacher);
+		// 设置所用教室状态为不可用
+//		classRoomDaoInf.updateClassRoomStatus(startclass.getClassroom_cid(),Integer.toString(MessageUtil.CLASSROM_CSTATUS_BUKEYONG));
+
 	}
-	
+
 	/**
 	 * 查找该方向开班最低周数
 	 * 

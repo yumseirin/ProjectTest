@@ -55,5 +55,21 @@
 		classroom_cstatus=#{classroom_cstatus,jdbcType=VARCHAR},classroom_cpeonumber=#{classroom_cpeonumber,jdbcType=VARCHAR}
 		where classroom_cid=#{classroom_cid,jdbcType=INTEGER}
 	</update>
+	
+	<!-- 修改教室状态 -->
+	<update id="updateClassRoomStatus">
+	update CLASSROOM
+	set
+	classroom_cstatus=#{classroom_cstatus,jdbcType=VARCHAR}
+	where classroom_cid=#{classroom_cid,jdbcType=INTEGER}
+	</update>
+	
+	<select id="selectclassroominclasses" parameterType="int" resultType="com.seirin.vo.course.StartClass">
+		select *
+		from startclass
+		where classroom_cid = #{classroom_cid,jdbcType=INTEGER}
+		and startclass_sstatus = 0 
+	
+	</select>
 
 </mapper>

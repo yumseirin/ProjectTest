@@ -126,6 +126,7 @@ public class StartClassControl {
 	@RequestMapping("addStartClass")
 	public String addStartClass(StartClass startclass) {
 		String str = "forward:/businessControl/gotoClasses.action";
+		System.out.println(str);
 		try {
 			startClassServiceInf.addStartClass(startclass);
 		} catch (Exception e) {

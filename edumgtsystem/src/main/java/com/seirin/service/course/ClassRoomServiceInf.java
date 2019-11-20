@@ -3,6 +3,7 @@ package com.seirin.service.course;
 import java.util.List;
 
 import com.seirin.vo.course.ClassRoom;
+import com.seirin.vo.course.StartClass;
 
 public interface ClassRoomServiceInf {
 
@@ -42,5 +43,13 @@ public interface ClassRoomServiceInf {
 	 * @param classroom
 	 */
 	public void updateClassRoom(ClassRoom classroom);
+	
+	/**
+	 * 查询该教室是否在正在上课的班级中
+	 * 
+	 * @param classroom
+	 * @return
+	 */
+	public StartClass selectclassroominclasses(int classroom_cid);
 
 }

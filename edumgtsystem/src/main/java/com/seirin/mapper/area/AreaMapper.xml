@@ -34,5 +34,12 @@
 		#{area_code}, area_name = #{area_name}
 		where area_id = #{area_id}
 	</update>
+	
+	<select id="validate" parameterType="String" resultType="com.seirin.vo.area.Area">
+		select * from area t where t.area_code=#{area_code}
+	</select>
+	<select id="validate2" parameterType="String" resultType="com.seirin.vo.area.Area">
+		select * from area t where t.area_name=#{area_name}
+	</select>
 
 </mapper>
