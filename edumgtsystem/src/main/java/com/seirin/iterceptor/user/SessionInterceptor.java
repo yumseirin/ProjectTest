@@ -31,7 +31,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		} else if (illegalURLFlag) {
 			System.out.println("进入拦截器......拦截的请求路径为" + request.getServletPath());
-			response.sendRedirect(request.getContextPath()+"/login.jsp");
+			//response.sendRedirect(request.getContextPath()+"/login.jsp");
 			return false;
 		} else {
 			return true;

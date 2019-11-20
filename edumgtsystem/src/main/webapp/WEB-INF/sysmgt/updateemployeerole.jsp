@@ -30,14 +30,14 @@
 			<td width="10" height="30" align="right">用户帐户:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<td width="100" class="inputText"><input type="text"
 				id="employee_loginname" name="employee_loginname" class="{required:true}" readonly="readonly"
-				maxlength="16" value="${requestScope.employeerole.employee_loginname }"/>
+				maxlength="16" value="${requestScope.employee.employee_loginname }"/>
 				<div id="rolenamemsg" style="color: red"></div></td>
 		</tr>
 		<tr>
 			<td width="10" height="30" align="right">用户名称:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<td width="100" class="inputText"><input type="text"
 				id="employee_name" name="employee_name" class="{required:true}" readonly="readonly"
-				maxlength="16"  value="${requestScope.employeerole.employee_name }"/>
+				maxlength="16"  value="${requestScope.employee.employee_name }"/>
 				<div id="rolenamemsg" style="color: red"></div></td>
 		</tr>
 		<tr>
@@ -64,7 +64,7 @@
 				onclick="javascript:history.back()" /></td>
 		</tr>
 	</table>
-	<input type="hidden" name="employee_id" id="employee_id" value="${requestScope.employeerole.employee_id }">
+	<input type="hidden" name="employee_id" id="employee_id" value="${requestScope.employee.employee_id }">
 </form>
 </body>
 </html>

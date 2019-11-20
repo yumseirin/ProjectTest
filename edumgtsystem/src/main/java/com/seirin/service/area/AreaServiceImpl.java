@@ -50,7 +50,7 @@ public class AreaServiceImpl implements AreaServiceInf {
 	 * 
 	 */
 	public void updateArea(Area area) {
-		areaDaoInf.updatearea(area);
+		areaDaoInf.updateArea(area);
 	}
 	
 	public Area validate(String area_code) {

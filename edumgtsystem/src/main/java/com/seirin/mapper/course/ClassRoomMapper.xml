@@ -34,7 +34,10 @@
 		</selectKey>
 		insert into CLASSROOM
 		values
-		(#{classroom_cid},#{area_id},#{classroom_cname},${@com.seirin.util.MessageUtil@CLASSROM_CSTATUS_KONGXIAN},#{classroom_cpeonumber})
+		(#{classroom_cid,jdbcType=INTEGER}
+		,#{area_id,jdbcType=INTEGER},#{classroom_cname,jdbcType=VARCHAR}
+		,${@com.seirin.util.MessageUtil@CLASSROM_CSTATUS_KEYONG}
+		,#{classroom_cpeonumber,jdbcType=VARCHAR})
 	</insert>
 
 	<!-- 根据教室id查询教室信息 -->
@@ -60,8 +63,8 @@
 	<update id="updateClassRoomStatus">
 	update CLASSROOM
 	set
-	classroom_cstatus=#{classroom_cstatus,jdbcType=VARCHAR}
-	where classroom_cid=#{classroom_cid,jdbcType=INTEGER}
+	classroom_cstatus=#{1,jdbcType=VARCHAR}
+	where classroom_cid=#{0,jdbcType=INTEGER}
 	</update>
 	
 	<select id="selectclassroominclasses" parameterType="int" resultType="com.seirin.vo.course.StartClass">
@@ -69,7 +72,6 @@
 		from startclass
 		where classroom_cid = #{classroom_cid,jdbcType=INTEGER}
 		and startclass_sstatus = 0 
-	
 	</select>
 
 </mapper>

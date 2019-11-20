@@ -19,8 +19,8 @@
 			from dual
 		</selectKey>
 		insert into
-		Employee(employee_id,employee_loginname,employee_name,employee_password,employee_sex,employee_attribute,employee_level,employee_business,employee_tel,employee_wechat,employee_area,employee_dept,position_id,employee_tech,employee_create_time)
-		values(#{employee_id},#{employee_loginname},#{employee_name},#{employee_password},#{employee_sex},#{employee_attribute},#{employee_level},#{employee_business},#{employee_tel},#{employee_wechat},#{employee_area},#{employee_dept},#{position_id},#{employee_tech},#{employee_create_time})
+		Employee(employee_id,employee_loginname,employee_name,employee_password,employee_sex,employee_attribute,employee_level,employee_business,employee_tel,employee_wechat,employee_area,employee_dept,position_id,employee_tech,employee_create_time,employee_num)
+		values(#{employee_id},#{employee_loginname},#{employee_name},#{employee_password},#{employee_sex},#{employee_attribute},#{employee_level},#{employee_business},#{employee_tel},#{employee_wechat},#{employee_area},#{employee_dept},#{position_id},#{employee_tech},#{employee_create_time},#{employee_num})
 	</insert>
 
 

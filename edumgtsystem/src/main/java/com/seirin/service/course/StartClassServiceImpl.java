@@ -7,8 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.seirin.dao.course.ClassRoomDaoInf;
 import com.seirin.dao.course.StartClassDaoInf;
 import com.seirin.dao.employee.EmployeeDaoInf;
+import com.seirin.util.MessageUtil;
 import com.seirin.vo.course.ClassRoom;
 import com.seirin.vo.course.StartClass;
 import com.seirin.vo.employee.Employee;
@@ -21,7 +23,8 @@ public class StartClassServiceImpl implements StartClassServiceInf {
 	@Autowired
 	private EmployeeDaoInf employeeDaoInf;
 
-//	private ClassRoomDaoInf classRoomDaoInf;
+	@Autowired
+	private ClassRoomDaoInf classRoomDaoInf;
 
 	/**
 	 * 查询所有符合条件的讲师
@@ -90,7 +93,8 @@ public class StartClassServiceImpl implements StartClassServiceInf {
 		teacher.setEmployee_num(teacher.getEmployee_num() + 1);
 		employeeDaoInf.updateEmployeeNumById(teacher);
 		// 设置所用教室状态为不可用
-//		classRoomDaoInf.updateClassRoomStatus(startclass.getClassroom_cid(),Integer.toString(MessageUtil.CLASSROM_CSTATUS_BUKEYONG));
+		
+		classRoomDaoInf.updateClassRoomStatus(startclass.getClassroom_cid(), Integer.toString(MessageUtil.CLASSROM_CSTATUS_BUKEYONG));
 
 	}
 

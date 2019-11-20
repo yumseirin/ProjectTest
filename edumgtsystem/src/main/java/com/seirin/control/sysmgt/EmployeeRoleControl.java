@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.seirin.service.employee.EmployeeServiceInf;
 import com.seirin.service.sysmgt.EmployeeRoleServiceInf;
 import com.seirin.util.MessageUtil;
 import com.seirin.vo.employee.Employee;
@@ -22,6 +23,9 @@ public class EmployeeRoleControl {
 
 	@Autowired
 	private EmployeeRoleServiceInf employeeRoleServiceInf;
+	
+	@Autowired
+	private EmployeeServiceInf employeeServiceInf; // 员工
 
 	/**
 	 * 跳转到员工权限管理列表页
@@ -63,6 +67,8 @@ public class EmployeeRoleControl {
 	 */
 	@RequestMapping("gotoUpdateEmployeeRole")
 	public String gotoUpdateEmployeeRole(int employee_id, Model model) {
+		Employee employee = employeeServiceInf.selectEmployeeByid(employee_id);
+		model.addAttribute("employee", employee);
 		EmployeeRole employeerole = employeeRoleServiceInf.selectEmployeeRoleById(employee_id);
 		model.addAttribute("employeerole", employeerole);
 		List<Role> roleList = employeeRoleServiceInf.selectRole(MessageUtil.ROLE_STATE_YOUXIAO);

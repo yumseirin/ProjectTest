@@ -35,7 +35,7 @@
 			<tr>
 				<th class="num"></th>
 				<th class="name">班级编号</th>
-				<th class="name">教室编号</th>
+				<th class="name">教室名称</th>
 				<th class="name">班级人数</th>
 				<th class="process">学习方向</th>
 				<th class="process">讲师</th>

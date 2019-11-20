@@ -165,7 +165,6 @@
 			</c:forEach>
 		</table>
 	</div>
-<input type="hidden"  name="auid"  id="auid"  value="2"> 
 </body>
 
 </html>

@@ -153,7 +153,7 @@ function checkemployee_loginname() {
 	if (employee_loginname == null || employee_loginname == "") {
 		$("#employee_loginnamemsg").html("<font color='red'>用户名不能为空</font>");
 		return false;
-	}else if (!/[a-zA-Z]\w{4,16}/.test(employee_loginname)) {
+	}else if (!/[a-zA-Z]\w{3,16}/.test(employee_loginname)) {
 		$("#employee_loginnamemsg").html("<font color='red'>4-16位由英文开头，英文和数字组成</font>");
 		return false;
 	} else {

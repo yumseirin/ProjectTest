@@ -107,6 +107,7 @@ public class DaoRuServiceImpl implements DaoRuServiceInf {
 				employee.setEmployee_dept(employ.getEmployee_dept());// 所属部门
 				employee.setPosition_id(employ.getPosition_id());// 所属职称
 				employee.setEmployee_tech(employ.getEmployee_tech());// 所属技术方向
+				employee.setEmployee_num(0);
 
 				if (emp != null) { // 更新
 					// 1)更新员工表数据

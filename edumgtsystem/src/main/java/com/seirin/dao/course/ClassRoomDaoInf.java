@@ -2,8 +2,6 @@ package com.seirin.dao.course;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.seirin.vo.course.ClassRoom;
 import com.seirin.vo.course.StartClass;
 
@@ -53,7 +51,7 @@ public interface ClassRoomDaoInf {
 	 * @param classroom_cid
 	 * @param classroom_cstatus
 	 */
-	public void updateClassRoomStatus(@Param(value="classroom_cid")int classroom_cid,@Param(value="classroom_cstatus") String classroom_cstatus);
+	public void updateClassRoomStatus(int classroom_cid,String classroom_cstatus);
 	
 	/**
 	 * 查询该教室是否在正在上课的班级中

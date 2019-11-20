@@ -111,6 +111,7 @@ public class ClassRoomControl {
 			classRoomServiceInf.addClassRoom(classroom);
 		} catch (Exception e) {
 			str = "/error/error";
+			e.printStackTrace();
 		}
 		return str;
 	}

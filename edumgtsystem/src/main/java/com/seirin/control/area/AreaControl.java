@@ -113,6 +113,7 @@ public class AreaControl {
 			model.addAttribute("arealist", arealist);
 		} catch (Exception e) {
 			str = "/error/error";
+			e.printStackTrace();
 		}
 		return str;
 	}
