@@ -88,6 +88,7 @@ $(function(){
 
 		</tr>
 	</table>
+	<input type="hidden"  name="auid"  id="auid"  >
 </form>
 </body>
 </html>
