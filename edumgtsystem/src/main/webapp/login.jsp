@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>教务排课系统</title>
+<title>培训机构教务管理系统</title>
 <!-- common.jsp引用css和js -->
 <%@ include file="/common/common.jsp"%>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -131,7 +131,7 @@ if (window != top)
 	</div>
 
 	<div class="logintop">
-		<span>欢迎登录教务排课系统</span>
+		<span>欢迎登录教务管理系统</span>
 		<ul>
 			<li><a href="#">回首页</a></li>
 			<li><a href="#">帮助</a></li>

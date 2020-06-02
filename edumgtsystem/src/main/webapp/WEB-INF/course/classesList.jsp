@@ -80,7 +80,7 @@
 							test="${startclass.startclass_sstatus == 1}">未开课</c:if> <c:if
 							test="${startclass.startclass_sstatus == 2}">已结课</c:if></td>
 					<td class="process"><a
-						href="<%=basePath%>businessControl/gotoClassCourse.action?startclass_sid=${startclass.startclass_sid}">查看课程体系</a></td>
+						href="<%=basePath%>businessControl/gotoClassCourse.action?startclass_sid=${startclass.startclass_sid}">查看课程</a></td>
 				</tr>
 			</c:forEach>
 		</table>

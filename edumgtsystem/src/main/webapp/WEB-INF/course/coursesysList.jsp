@@ -55,7 +55,7 @@
 <body>
 
 	<div class="title">
-		<h2>所有班级</h2>
+		<h2>课程体系</h2>
 	</div>
 	<div class="query">
 		<div class="query-conditions ue-clear">

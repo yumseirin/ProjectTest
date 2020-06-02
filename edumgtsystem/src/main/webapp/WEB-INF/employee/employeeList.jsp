@@ -27,15 +27,11 @@
 <script type="text/javascript" src="<%=basePath%>js/form.js"
 	charset="utf-8"></script>
 <!---------------------------------统计图js文件---------------------------------------->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/charts/fusioncharts.js"
-	charset="utf-8"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/charts/fusioncharts.charts.js"
-	charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/charts/fusioncharts.js" charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/charts/fusioncharts.charts.js" charset="utf-8"></script>
 
 <script type="text/javascript">
-    var path ="<%=basePath%>";
+ var path ="<%=basePath%>";
 
 	//进入修改页面
 	function updateEmployee() {

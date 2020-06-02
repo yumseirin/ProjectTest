@@ -28,7 +28,7 @@
 	<tr>
 		<td height="31" class="right_tittle">您的位置：<a
 			href="<%=basePath%>employeeControl/gotoEmployeeList.action">员工管理</a>
-			&gt;&gt;添加员工
+			&gt;&gt;批量上传
 		</td>
 	</tr>
 </table>

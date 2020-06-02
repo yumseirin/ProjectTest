@@ -21,7 +21,7 @@
 	<tr>
 		<td height="31" class="right_tittle">您的位置：<a
 			href="<%=basePath%>coursesysControl/selectCoursesys.action">标准课程体系</a>
-			&gt;&gt;添加课程体系
+			&gt;&gt;修改课程体系
 		</td>
 	</tr>
 </table>

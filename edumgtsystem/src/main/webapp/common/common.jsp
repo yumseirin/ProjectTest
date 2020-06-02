@@ -13,8 +13,7 @@
 
 <!-- jquery库 -->
 
-<script type="text/javascript"
-	src="<%=basePath%>js/jquery-easyui-1.4.5/jquery.min.js" charset="utf-8">
+<script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.4.5/jquery.min.js" charset="utf-8">
 </script>
 
 <!-- ====== easyui相关库   顺序别颠倒，是有序的 ========================== -->

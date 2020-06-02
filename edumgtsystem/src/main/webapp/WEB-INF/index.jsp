@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>排课系统</title>
+<title>培训机构教务管理系统</title>
 
 <!-- common.jsp引用css和js -->
 <%@ include file="/common/common.jsp"%>
@@ -36,7 +36,7 @@
 <!--手册 Layout（布局）里-->
 <body class="easyui-layout">
 	<div
-		data-options="region:'north',href:'${pageContext.request.contextPath}/layout/north.jsp',title:'欢迎使用教务排课系统',split:true"
+		data-options="region:'north',href:'${pageContext.request.contextPath}/layout/north.jsp',title:'欢迎使用教务管理系统',split:true"
 		style="height: 120px;"></div>
 
 	<div
