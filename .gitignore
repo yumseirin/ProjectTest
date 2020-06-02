@@ -51,3 +51,5 @@ config.properties
 *.properties
 
 /Servers/
+
+/rqsproject/
